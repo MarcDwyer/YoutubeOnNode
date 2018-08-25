@@ -67,7 +67,7 @@ html, body {
 
 .youtube {
   display: block;
-  margin-top: 25px;
+  margin-top: 5px;
   margin-left: auto;
   margin-right: auto;
   height: 45px;
@@ -106,3 +106,7 @@ html, body {
   text-align: center;
   font-size: 25px;
   margin-top: 25%; }
+
+  .number {
+    font-family: 'Roboto', sans-serif;
+  }

@@ -15,49 +15,65 @@ function fetcher() {
   fetch ('fetches/ice.json')
   .then((res) => res.json())
   .then((data) => {
-    console.log(data);
     icejson = data;
     if (!data.pageInfo.totalResults == 0) {
       icecheck = true;
+      getStats('icestats.json');
       updater();
       }
   });
   //hyphonix
-  fetch ('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCaFpm67qMk1W1wJkFhGXucA&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I')
+  fetch ('fetches/hyphonix.json')
   .then((res) => res.json())
   .then((data) => {
     hyphonixjson = data;
     if (!data.pageInfo.totalResults == 0) {
       hypcheck = true;
+      getStats('hyphonixstats.json');
       updater();
       }
   });
   // tsa
-  fetch ('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCB0H_1M78_jwTyfaJuP241g&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I')
+  fetch ('fetches/tsa.json')
   .then((res) => res.json())
   .then((data) => {
     tsajson = data;
     if (!data.pageInfo.totalResults == 0) {
       tsacheck = true;
+      getStats('tsastats.json');
       updater();
       }
   });
   //destiny
-  fetch ('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UC554eY5jNUfDq3yDOJYirOQ&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I')
+  fetch ('fetches/destiny.json')
   .then((res) => res.json())
   .then((data) => {
     destinyjson = data;
     if (!data.pageInfo.totalResults == 0) {
       destcheck = true;
+      getStats('destinystats.json');
       updater();
       }
   });
 }
 fetcher();
-setInterval(fetcher, 10000);
+setInterval(fetcher, 60000);
+
+let athing;
+function getStats(name) {
+  fetch (`../fetches/${name}`)
+  .then((res) => res.json())
+  .then((data) => {
+    athing = data;
+    const vidnumber = data.items[0].liveStreamingDetails.concurrentViewers;
+    const match = name.split('stats');
+    console.log(match[0]);
+    const viddiv = document.querySelector(`.${match[0]} .number`)
+    viddiv.textContent = `${vidnumber} viewers`;
+  })
+}
 
 function updater() {
-  console.log('helo');
 
 const dataset = document.querySelectorAll('[data-who]');
 
@@ -108,5 +124,3 @@ function addVideo() {
   }
 }
 
-
-setInterval(updater, 300000);
