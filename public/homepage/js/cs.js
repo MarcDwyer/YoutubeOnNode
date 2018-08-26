@@ -111,23 +111,28 @@ function remover(astring) {
 
 const links = document.querySelectorAll('.pic');
 const video = document.querySelector('.video');
+const chat = document.querySelector('.chat');
 function addVideo() {
   const itemclass = this.classList.value;
 if (itemclass.includes('suit')) {
   const tsaurl = tsajson.items[0].id.videoId;
-  video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${tsaurl}"></iframe>`;
+  video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${tsaurl}" frameborder="0"></iframe>`;
+  chat.innerHTML = `<iframe src="https://www.youtube.com/live_chat?v=${tsaurl}&embed_domain=localhost"></iframe>`;
 }
 if (itemclass.includes('bignose')) {
     const iceurl = icejson.items[0].id.videoId;
-    video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${iceurl}"></iframe>`;
+    video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${iceurl}" frameborder="0"></iframe>`;
+    chat.innerHTML = `<iframe src="https://www.youtube.com/live_chat?v=${tsaurl}&embed_domain=localhost"></iframe>`;
   }
   if (itemclass.includes('dwarf')) {
     const desturl = destinyjson.items[0].id.videoId;
-    video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${desturl}"></iframe>`;
+    video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${desturl}" frameborder="0"></iframe>`;
+    chat.innerHTML = `<iframe src="https://www.youtube.com/live_chat?v=${tsaurl}&embed_domain=localhost"></iframe>`;
   }
   if (itemclass.includes('bald')) {
     const hyphurl = hyphonixjson.items[0].id.videoId;
-    video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${hyphurl}"></iframe>`;
+    video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${hyphurl}" frameborder="0"></iframe>`;
+    chat.innerHTML = `<iframe src="https://www.youtube.com/live_chat?v=${hyphurl}&embed_domain=localhost"></iframe>`;
   }
 }
 

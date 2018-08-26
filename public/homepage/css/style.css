@@ -14,7 +14,7 @@ html, body {
 
 .cards {
   order: 0;
-  width: 270px;
+  width: 315px;
   height: 100%;
   overflow: auto;
   display: block;
@@ -97,7 +97,8 @@ html, body {
   50% {
     box-shadow: 0px 0px 20px 20px rgba(255, 0, 0, 0); }
   100% {
-    box-shadow: 0px 0px 0px 0px rgba(255, 0, 0, 0); } }
+    box-shadow: 0px 0px 0px 0px rgba(255, 0, 0, 0); } 
+  }
 
 .stream {
   width: 100%;
@@ -119,6 +120,7 @@ html, body {
 
   .number {
     font-family: 'Roboto', sans-serif;
+    font-style: oblique;
   }
 
   .hello {
