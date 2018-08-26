@@ -3,6 +3,11 @@ let destcheck = false;
 let hypcheck = false;
 let tsacheck = false;
 
+let icejson;
+let tsajson;
+let destinyjson;
+let hyphonixjson;
+
 
 function fetcher() {
   console.log('working...')
@@ -13,9 +18,11 @@ function fetcher() {
     icejson = data;
     if (!data.pageInfo.totalResults == 0) {
       icecheck = true;
+      updater('ice');
       getStats('icestats.json');
       } else {
         icecheck = false;
+        remover('ice');
       }
 
   });
@@ -26,9 +33,11 @@ function fetcher() {
     hyphonixjson = data;
     if (!data.pageInfo.totalResults == 0) {
       hypcheck = true;
+      updater('hyphonix');
       getStats('hyphonixstats.json');
       } else {
         hypcheck = false;
+        remover('ice');
       }
   });
   // tsa
@@ -38,9 +47,11 @@ function fetcher() {
     tsajson = data;
     if (!data.pageInfo.totalResults == 0) {
       tsacheck = true;
+      updater('tsa');
       getStats('tsastats.json');
       } else {
         tsacheck = false;
+        remover('ice');
       }
   });
   //destiny
@@ -50,20 +61,18 @@ function fetcher() {
     destinyjson = data;
     if (!data.pageInfo.totalResults == 0) {
       destcheck = true;
+      updater('destiny', destcheck);
       getStats('destinystats.json');
       } else {
         destcheck = false;
+        remover('ice');
       }
   });
   return Promise.all([fetch1, fetch2, fetch3, fetch4]);
 }
-init();
-setInterval(fetcher, 60000);
+fetcher();
+setInterval(fetcher, 120000);
 
-async function init() {
-  await fetcher();
-  updater();
-}
 
 function getStats(name) {
   fetch (`../fetches/${name}`)
@@ -78,73 +87,47 @@ function getStats(name) {
 
 const pics = document.querySelectorAll('.pic');
 
-function updater() {
+function updater(astring) {
 console.log('updater working...')
-const dataset = document.querySelectorAll('[data-who]');
-
+const dataset = document.querySelectorAll('.card');
 dataset.forEach(item => {
-if (item.dataset.who == 'icecheck' && icecheck == true) {
+  if (item.classList.value.includes(astring)) {
   item.children[1].classList.add('active');
-  item.addEventListener('click', addVideo)
-}
-if (item.dataset.who == 'destcheck' && destcheck == true) {
-  item.children[1].classList.add('active');
-  item.addEventListener('click', addVideo)
-}
-if (item.dataset.who == 'hypcheck' && hypcheck == true) {
-  item.children[1].classList.add('active');
-  item.addEventListener('click', addVideo)
-}
-if (item.dataset.who == 'tsacheck' && tsacheck == true) {
-  item.children[1].classList.add('active');
-  item.addEventListener('click', addVideo)
+  item.querySelector('.pic').addEventListener('click', addVideo);
 }
 })
-
-
-dataset.forEach(item => {
-  if (item.dataset.who == 'icecheck' && icecheck == false) {
-    item.children[1].classList.remove('active');
-    item.removeEventListener('click', addVideo);
-  }
-  if (item.dataset.who == 'destcheck' && destcheck == false) {
-    item.children[1].classList.remove('active');
-    item.removeEventListener('click', addVideo);
-  }
-  if (item.dataset.who == 'hypcheck' && hypcheck == false) {
-    item.children[1].classList.remove('active');
-    item.removeEventListener('click', addVideo);
-  }
-  if (item.dataset.who == 'tsacheck' && tsacheck == false) {
-    item.children[1].classList.remove('active');
-    item.removeEventListener('click', addVideo);
-  }
-  });
 }
 
+function remover(astring) {
+  const dataset = document.querySelectorAll('.card');
+  dataset.forEach(item => {
+    if (item.classList.value.includes(astring)) {
+    item.children[1].classList.remove('active');
+    item.querySelector('.pic').removeEventListener('click', addVideo);
+  }
+  })
+}
 
 
 const links = document.querySelectorAll('.pic');
 const video = document.querySelector('.video');
 function addVideo() {
-  const data = this.dataset.who;
-
-  if (data == 'icecheck') {
+  const itemclass = this.classList.value;
+if (itemclass.includes('suit')) {
+  const tsaurl = tsajson.items[0].id.videoId;
+  video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${tsaurl}"></iframe>`;
+}
+if (itemclass.includes('bignose')) {
     const iceurl = icejson.items[0].id.videoId;
     video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${iceurl}"></iframe>`;
   }
-  if (data == 'destcheck') {
+  if (itemclass.includes('dwarf')) {
     const desturl = destinyjson.items[0].id.videoId;
     video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${desturl}"></iframe>`;
   }
-  if (data == 'hypcheck') {
-
+  if (itemclass.includes('bald')) {
     const hyphurl = hyphonixjson.items[0].id.videoId;
     video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${hyphurl}"></iframe>`;
-  }
-  if (data == 'tsacheck') {
-    const tsaurl = tsajson.items[0].id.videoId;
-    video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${tsaurl}"></iframe>`;
   }
 }
 
