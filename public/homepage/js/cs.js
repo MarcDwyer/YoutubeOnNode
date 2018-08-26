@@ -1,8 +1,3 @@
-let tsajson;
-let icejson;
-let hyponixjson;
-let destinyjson;
-
 let icecheck = false;
 let destcheck = false;
 let hypcheck = false;
@@ -12,74 +7,83 @@ let tsacheck = false;
 function fetcher() {
   console.log('working...')
   // ice
-  fetch ('fetches/ice.json')
+  const fetch1 = fetch ('fetches/ice.json')
   .then((res) => res.json())
   .then((data) => {
     icejson = data;
     if (!data.pageInfo.totalResults == 0) {
       icecheck = true;
       getStats('icestats.json');
-      updater();
+      } else {
+        icecheck = false;
       }
+
   });
   //hyphonix
-  fetch ('fetches/hyphonix.json')
+  const fetch2 = fetch ('fetches/hyphonix.json')
   .then((res) => res.json())
   .then((data) => {
     hyphonixjson = data;
     if (!data.pageInfo.totalResults == 0) {
       hypcheck = true;
       getStats('hyphonixstats.json');
-      updater();
+      } else {
+        hypcheck = false;
       }
   });
   // tsa
-  fetch ('fetches/tsa.json')
+  const fetch3 = fetch ('fetches/tsa.json')
   .then((res) => res.json())
-  .then((data) => {
+  .then(data => {
     tsajson = data;
     if (!data.pageInfo.totalResults == 0) {
       tsacheck = true;
       getStats('tsastats.json');
-      updater();
+      } else {
+        tsacheck = false;
       }
   });
   //destiny
-  fetch ('fetches/destiny.json')
+  const fetch4 = fetch ('fetches/destiny.json')
   .then((res) => res.json())
-  .then((data) => {
+  .then(data => {
     destinyjson = data;
     if (!data.pageInfo.totalResults == 0) {
       destcheck = true;
       getStats('destinystats.json');
-      updater();
+      } else {
+        destcheck = false;
       }
   });
+  return Promise.all([fetch1, fetch2, fetch3, fetch4]);
 }
-fetcher();
+init();
 setInterval(fetcher, 60000);
 
-let athing;
+async function init() {
+  await fetcher();
+  updater();
+}
+
 function getStats(name) {
   fetch (`../fetches/${name}`)
   .then((res) => res.json())
   .then((data) => {
-    athing = data;
     const vidnumber = data.items[0].liveStreamingDetails.concurrentViewers;
     const match = name.split('stats');
-    console.log(match[0]);
     const viddiv = document.querySelector(`.${match[0]} .number`)
     viddiv.textContent = `${vidnumber} viewers`;
   })
 }
 
-function updater() {
+const pics = document.querySelectorAll('.pic');
 
+function updater() {
+console.log('updater working...')
 const dataset = document.querySelectorAll('[data-who]');
 
 dataset.forEach(item => {
 if (item.dataset.who == 'icecheck' && icecheck == true) {
-
   item.children[1].classList.add('active');
   item.addEventListener('click', addVideo)
 }
@@ -97,7 +101,27 @@ if (item.dataset.who == 'tsacheck' && tsacheck == true) {
 }
 })
 
+
+dataset.forEach(item => {
+  if (item.dataset.who == 'icecheck' && icecheck == false) {
+    item.children[1].classList.remove('active');
+    item.removeEventListener('click', addVideo);
+  }
+  if (item.dataset.who == 'destcheck' && destcheck == false) {
+    item.children[1].classList.remove('active');
+    item.removeEventListener('click', addVideo);
+  }
+  if (item.dataset.who == 'hypcheck' && hypcheck == false) {
+    item.children[1].classList.remove('active');
+    item.removeEventListener('click', addVideo);
+  }
+  if (item.dataset.who == 'tsacheck' && tsacheck == false) {
+    item.children[1].classList.remove('active');
+    item.removeEventListener('click', addVideo);
+  }
+  });
 }
+
 
 
 const links = document.querySelectorAll('.pic');

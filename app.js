@@ -67,7 +67,6 @@ function fetcher() {
   });
 }
 
-
 function getStats(vidnum, name) {
   fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics%2CliveStreamingDetails&id=${vidnum}&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I`)
   .then((res) => res.json())
