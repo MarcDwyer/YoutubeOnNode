@@ -10,21 +10,75 @@ const fetch = require('node-fetch');
 
 
 fetcher();
-
+setInterval(fetcher, 180000);
 function fetcher() {
-  //ice
+  // ice
   fetch ('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCv9Edl_WbtbPeURPtFDo-uA&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I')
   .then((res) => res.json())
-  .then ((data) => {
-    console.log(data);
+  .then((data) => {
     const newdata = JSON.stringify(data);
     fs.writeFile('public/homepage/fetches/ice.json', newdata, finished)
-
+    if (!data.pageInfo.totalResults == 0) {
+      getStats(data.items[0].id.videoId, 'ice');
+    }
     function finished(err) {
       console.log('Ice JSON requested and stored');
     }
+  });
+  //hyphonix
+  fetch ('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCaFpm67qMk1W1wJkFhGXucA&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I')
+  .then((res) => res.json())
+  .then((data) => {
+    const newdata = JSON.stringify(data);
+    fs.writeFile('public/homepage/fetches/hyphonix.json', newdata, finished)
+    if (!data.pageInfo.totalResults == 0) {
+      getStats(data.items[0].id.videoId, 'hyphonix');
+    }
+    function finished(err) {
+      console.log('Hyphonix JSON requested and stored');
+    }
+  })
+    
+  // tsa
+  fetch ('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCB0H_1M78_jwTyfaJuP241g&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I')
+  .then((res) => res.json())
+  .then((data) => {
+    const newdata = JSON.stringify(data);
+    fs.writeFile('public/homepage/fetches/tsa.json', newdata, finished)
+    if (!data.pageInfo.totalResults == 0) {
+      getStats(data.items[0].id.videoId, 'tsa');
+    }
+    function finished(err) {
+      console.log('TSA JSON requested and stored');
+    }
+  });
+  //destiny
+  fetch ('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UC554eY5jNUfDq3yDOJYirOQ&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I')
+  .then((res) => res.json())
+  .then((data) => {
+    const newdata = JSON.stringify(data);
+    fs.writeFile('public/homepage/fetches/destiny.json', newdata, finished)
+    if (!data.pageInfo.totalResults == 0) {
+      getStats(data.items[0].id.videoId, 'destiny');
+    }
+    function finished(err) {
+      console.log('Destiny JSON requested and stored');
+    }
+  });
+}
+
+function getStats(vidnum, name) {
+  fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics%2CliveStreamingDetails&id=${vidnum}&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I`)
+  .then((res) => res.json())
+  .then((data) => {
+    const newdata = JSON.stringify(data);
+    fs.writeFile(`public/homepage/fetches/${name}stats.json`, newdata, finished)
+    function finished(err) {
+      console.log(`Stats have been applied..`);
+    }
   })
 }
+
 
 
 var app = express();

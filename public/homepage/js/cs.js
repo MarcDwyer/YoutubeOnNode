@@ -1,112 +1,138 @@
-let tsajson;
-let icejson;
-let hyponixjson;
-let destinyjson;
-
 let icecheck = false;
 let destcheck = false;
 let hypcheck = false;
 let tsacheck = false;
 
+let icejson;
+let tsajson;
+let destinyjson;
+let hyphonixjson;
+
 
 function fetcher() {
   console.log('working...')
   // ice
-  fetch ('fetches/ice.json')
+  const fetch1 = fetch ('fetches/ice.json')
   .then((res) => res.json())
   .then((data) => {
-    console.log(data);
     icejson = data;
     if (!data.pageInfo.totalResults == 0) {
       icecheck = true;
-      updater();
+      updater('ice');
+      getStats('icestats.json');
+      } else {
+        icecheck = false;
+        remover('ice');
       }
+
   });
   //hyphonix
-  fetch ('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCaFpm67qMk1W1wJkFhGXucA&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I')
+  const fetch2 = fetch ('fetches/hyphonix.json')
   .then((res) => res.json())
   .then((data) => {
     hyphonixjson = data;
     if (!data.pageInfo.totalResults == 0) {
       hypcheck = true;
-      updater();
+      updater('hyphonix');
+      getStats('hyphonixstats.json');
+      } else {
+        hypcheck = false;
+        remover('ice');
       }
   });
   // tsa
-  fetch ('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCB0H_1M78_jwTyfaJuP241g&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I')
+  const fetch3 = fetch ('fetches/tsa.json')
   .then((res) => res.json())
-  .then((data) => {
+  .then(data => {
     tsajson = data;
     if (!data.pageInfo.totalResults == 0) {
       tsacheck = true;
-      updater();
+      updater('tsa');
+      getStats('tsastats.json');
+      } else {
+        tsacheck = false;
+        remover('ice');
       }
   });
   //destiny
-  fetch ('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UC554eY5jNUfDq3yDOJYirOQ&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I')
+  const fetch4 = fetch ('fetches/destiny.json')
   .then((res) => res.json())
-  .then((data) => {
+  .then(data => {
     destinyjson = data;
     if (!data.pageInfo.totalResults == 0) {
       destcheck = true;
-      updater();
+      updater('destiny', destcheck);
+      getStats('destinystats.json');
+      } else {
+        destcheck = false;
+        remover('ice');
       }
   });
+  return Promise.all([fetch1, fetch2, fetch3, fetch4]);
 }
 fetcher();
-setInterval(fetcher, 10000);
+setInterval(fetcher, 120000);
 
-function updater() {
-  console.log('helo');
 
-const dataset = document.querySelectorAll('[data-who]');
+function getStats(name) {
+  fetch (`../fetches/${name}`)
+  .then((res) => res.json())
+  .then((data) => {
+    const vidnumber = data.items[0].liveStreamingDetails.concurrentViewers;
+    const match = name.split('stats');
+    const viddiv = document.querySelector(`.${match[0]} .number`)
+    viddiv.textContent = `${vidnumber} viewers`;
+  })
+}
 
+const pics = document.querySelectorAll('.pic');
+
+function updater(astring) {
+console.log('updater working...')
+const dataset = document.querySelectorAll('.card');
 dataset.forEach(item => {
-if (item.dataset.who == 'icecheck' && icecheck == true) {
-
+  if (item.classList.value.includes(astring)) {
   item.children[1].classList.add('active');
-  item.addEventListener('click', addVideo)
-}
-if (item.dataset.who == 'destcheck' && destcheck == true) {
-  item.children[1].classList.add('active');
-  item.addEventListener('click', addVideo)
-}
-if (item.dataset.who == 'hypcheck' && hypcheck == true) {
-  item.children[1].classList.add('active');
-  item.addEventListener('click', addVideo)
-}
-if (item.dataset.who == 'tsacheck' && tsacheck == true) {
-  item.children[1].classList.add('active');
-  item.addEventListener('click', addVideo)
+  item.querySelector('.pic').addEventListener('click', addVideo);
 }
 })
+}
 
+function remover(astring) {
+  const dataset = document.querySelectorAll('.card');
+  dataset.forEach(item => {
+    if (item.classList.value.includes(astring)) {
+    item.children[1].classList.remove('active');
+    item.querySelector('.pic').removeEventListener('click', addVideo);
+  }
+  })
 }
 
 
 const links = document.querySelectorAll('.pic');
 const video = document.querySelector('.video');
+const chat = document.querySelector('.chat');
 function addVideo() {
-  const data = this.dataset.who;
-
-  if (data == 'icecheck') {
+  const itemclass = this.classList.value;
+if (itemclass.includes('suit')) {
+  const tsaurl = tsajson.items[0].id.videoId;
+  video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${tsaurl}" frameborder="0"></iframe>`;
+  chat.innerHTML = `<iframe src="https://www.youtube.com/live_chat?v=${tsaurl}&embed_domain=localhost"></iframe>`;
+}
+if (itemclass.includes('bignose')) {
     const iceurl = icejson.items[0].id.videoId;
-    video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${iceurl}"></iframe>`;
+    video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${iceurl}" frameborder="0"></iframe>`;
+    chat.innerHTML = `<iframe src="https://www.youtube.com/live_chat?v=${tsaurl}&embed_domain=localhost"></iframe>`;
   }
-  if (data == 'destcheck') {
+  if (itemclass.includes('dwarf')) {
     const desturl = destinyjson.items[0].id.videoId;
-    video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${desturl}"></iframe>`;
+    video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${desturl}" frameborder="0"></iframe>`;
+    chat.innerHTML = `<iframe src="https://www.youtube.com/live_chat?v=${tsaurl}&embed_domain=localhost"></iframe>`;
   }
-  if (data == 'hypcheck') {
-
+  if (itemclass.includes('bald')) {
     const hyphurl = hyphonixjson.items[0].id.videoId;
-    video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${hyphurl}"></iframe>`;
-  }
-  if (data == 'tsacheck') {
-    const tsaurl = tsajson.items[0].id.videoId;
-    video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${tsaurl}"></iframe>`;
+    video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${hyphurl}" frameborder="0"></iframe>`;
+    chat.innerHTML = `<iframe src="https://www.youtube.com/live_chat?v=${hyphurl}&embed_domain=localhost"></iframe>`;
   }
 }
 
-
-setInterval(updater, 300000);
