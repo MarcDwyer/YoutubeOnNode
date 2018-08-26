@@ -81,7 +81,7 @@ function getStats(name) {
     const vidnumber = data.items[0].liveStreamingDetails.concurrentViewers;
     const match = name.split('stats');
     const viddiv = document.querySelector(`.${match[0]} .number`)
-    viddiv.textContent = `${vidnumber} viewers`;
+    viddiv.innerHTML = `<span>${vidnumber} viewers</span>`;
   })
 }
 

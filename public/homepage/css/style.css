@@ -1,5 +1,5 @@
 html, body {
-  background-color: #eee;
+  background-color: #2D2D2D;
   height: 100%;
   margin: 0px;
   padding: 0px; 
@@ -12,22 +12,26 @@ html, body {
   height: 100%;
   margin-left: auto;
   margin-right: auto; 
+  color: #eee;
+  font-family: 'Roboto', sans-serif;
 }
 
 .cards {
   order: 0;
   width: 315px;
   height: 100%;
-  overflow: auto;
   display: block;
-  border-left: 1px solid #ABABAB;
-  border-right: 1px solid #ABABAB;
-  background-color: #eee; }
+  overflow-Y: auto;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  background-color: #212121; 
+  border-radius: 10px;
+}
 
 .thetitle {
   order: 0;
   width:100%;
-  max-height: 75px;
+  max-height: 45px;
   border-bottom: solid #D6D6D6 1px; }
 
 .ice {
@@ -62,9 +66,9 @@ html, body {
   margin-left: 5px;
   margin-bottom: 5px;
   height: 250px;
-  border-color: #ABABAB;
+  border-color: black;
   font-size: 15px;
-  font-family: 'Shrikhand', cursive; }
+ }
 
 .pic {
   height: 85px;
@@ -75,7 +79,7 @@ html, body {
 
 .fa {
   display: block;
-  margin-top: 45px;
+  margin-top: 25px;
   margin-left: auto;
   margin-right: auto;
   font-size: 35px;
@@ -120,8 +124,8 @@ html, body {
   margin-top: 25%; }
 
   .number {
-    font-family: 'Roboto', sans-serif;
-    font-style: oblique;
+    margin-top: 5px;
+
   }
 
   .hello {
@@ -141,4 +145,8 @@ html, body {
     height: 100%;
     background-color: black;
     border-radius: 5px;
+  }
+
+  h1, h2 {
+    font-family: 'Oleo Script', cursive;
   }
