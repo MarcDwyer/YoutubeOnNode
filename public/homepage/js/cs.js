@@ -37,7 +37,7 @@ function fetcher() {
       getStats('hyphonixstats.json');
       } else {
         hypcheck = false;
-        remover('ice');
+        remover('hyphonix');
       }
   });
   // tsa
@@ -51,7 +51,7 @@ function fetcher() {
       getStats('tsastats.json');
       } else {
         tsacheck = false;
-        remover('ice');
+        remover('tsa');
       }
   });
   //destiny
@@ -65,7 +65,7 @@ function fetcher() {
       getStats('destinystats.json');
       } else {
         destcheck = false;
-        remover('ice');
+        remover('destiny');
       }
   });
   return Promise.all([fetch1, fetch2, fetch3, fetch4]);
@@ -88,20 +88,22 @@ function getStats(name) {
 const pics = document.querySelectorAll('.pic');
 
 function updater(astring) {
-console.log('updater working...')
 const dataset = document.querySelectorAll('.card');
 dataset.forEach(item => {
   if (item.classList.value.includes(astring)) {
+    console.log(item.children[1]);
   item.children[1].classList.add('active');
-  item.querySelector('.pic').addEventListener('click', addVideo);
+  item.children[1].addEventListener('click', addVideo);
 }
 })
 }
 
-function remover(astring) {
+function remover(stringer) {
+  console.log('remover removing...')
+  console.log(stringer);
   const dataset = document.querySelectorAll('.card');
   dataset.forEach(item => {
-    if (item.classList.value.includes(astring)) {
+    if (item.classList.value.includes(stringer)) {
     item.children[1].classList.remove('active');
     item.querySelector('.pic').removeEventListener('click', addVideo);
   }
@@ -122,12 +124,12 @@ if (itemclass.includes('suit')) {
 if (itemclass.includes('bignose')) {
     const iceurl = icejson.items[0].id.videoId;
     video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${iceurl}" frameborder="0"></iframe>`;
-    chat.innerHTML = `<iframe src="https://www.youtube.com/live_chat?v=${tsaurl}&embed_domain=localhost"></iframe>`;
+    chat.innerHTML = `<iframe src="https://www.youtube.com/live_chat?v=${iceurl}&embed_domain=localhost"></iframe>`;
   }
   if (itemclass.includes('dwarf')) {
     const desturl = destinyjson.items[0].id.videoId;
     video.innerHTML = `<iframe class="stream" src="https://www.youtube.com/embed/${desturl}" frameborder="0"></iframe>`;
-    chat.innerHTML = `<iframe src="https://www.youtube.com/live_chat?v=${tsaurl}&embed_domain=localhost"></iframe>`;
+    chat.innerHTML = `<iframe src="https://www.youtube.com/live_chat?v=${desturl}&embed_domain=localhost"></iframe>`;
   }
   if (itemclass.includes('bald')) {
     const hyphurl = hyphonixjson.items[0].id.videoId;
