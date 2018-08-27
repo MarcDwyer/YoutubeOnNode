@@ -17,11 +17,10 @@ html, body {
 }
 
 .cards {
-  position:absolute;
   top: 0;
   left: 0;
   order: 0;
-  width: 300px;
+  width: 350px;
   height: 100%;
   display: block;
   overflow-Y: auto;
@@ -112,17 +111,12 @@ html, body {
   }
 
 .stream {
+  order:1;
   width: 100%;
   height: 100%;
   border-color: black;
   border-radius: 3px;
-  background-color: black; }
-
-.video {
-  order: 1;
-  height: 100%;
-  width: 100%; 
-}
+ }
 
 .counter {
   text-align: center;
@@ -144,13 +138,6 @@ html, body {
     order: 2;
     width: 450px;
     height: 100%;
-    border-radius: 5px;
-  }
-  .chat iframe {
-    width: 100%;
-    height: 100%;
-    border:none;
-    border-radius: 5px;
   }
 
   h1, h2 {
