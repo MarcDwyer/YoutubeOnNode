@@ -26,7 +26,7 @@ function fetcher() {
     }
   });
   //hyphonix
-  fetch ('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCaFpm67qMk1W1wJkFhGXucA&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I')
+  fetch ('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCn0Fbg9fPbtMIh3xUyCDx8g&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I')
   .then((res) => res.json())
   .then((data) => {
     const newdata = JSON.stringify(data);
