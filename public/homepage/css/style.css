@@ -143,3 +143,11 @@ html, body {
   h1, h2 {
     font-family: 'Oleo Script', cursive;
   }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    background-color: black;
+}
+::-webkit-scrollbar-thumb {
+  background: #2D2D2D; 
+}

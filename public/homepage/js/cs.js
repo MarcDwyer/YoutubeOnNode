@@ -1,77 +1,39 @@
-let icecheck = false;
-let destcheck = false;
-let hypcheck = false;
-let tsacheck = false;
 
-let icejson;
-let tsajson;
-let destinyjson;
-let hyphonixjson;
-
-
-function fetcher() {
-  // ice
-  const fetch1 = fetch ('fetches/ice.json')
-  .then((res) => res.json())
-  .then((data) => {
-    icejson = data;
-    if (!data.pageInfo.totalResults == 0) {
-      icecheck = true;
-      updater('ice');
-      getStats('icestats.json');
+class getStreamers {
+  constructor(name, vidid) {
+    this.name = name;
+    this.vidid = vidid;
+  }
+  getData() {
+    console.log(this.name)
+    fetch(`fetches/${this.name}.json`)
+    .then((res) => res.json())
+    .then(data => {
+      const vidurl = data.items[0].id.videoId;
+      if (!data.pageInfo.totalResults == 0) {
+        this.vidid = data.items[0].id.videoId
+        updater(`${this.name}`);
+        addVideo(this.name, vidurl);
+        getStats(`${this.name}stats.json`)
       } else {
-        icecheck = false;
-        remover('ice');
+        remover(`${this.name}`)
       }
-
-  });
-  //hyphonix
-  const fetch2 = fetch ('fetches/hyphonix.json')
-  .then((res) => res.json())
-  .then((data) => {
-    hyphonixjson = data;
-    if (!data.pageInfo.totalResults == 0) {
-      hypcheck = true;
-      updater('hyphonix');
-      getStats('hyphonixstats.json');
-      } else {
-        hypcheck = false;
-        remover('hyphonix');
-      }
-  });
-  // tsa
-  const fetch3 = fetch ('fetches/tsa.json')
-  .then((res) => res.json())
-  .then(data => {
-    tsajson = data;
-    if (!data.pageInfo.totalResults == 0) {
-      tsacheck = true;
-      updater('tsa');
-      getStats('tsastats.json');
-      } else {
-        tsacheck = false;
-        remover('tsa');
-      }
-  });
-  //destiny
-  const fetch4 = fetch ('fetches/destiny.json')
-  .then((res) => res.json())
-  .then(data => {
-    destinyjson = data;
-    if (!data.pageInfo.totalResults == 0) {
-      destcheck = true;
-      updater('destiny', destcheck);
-      getStats('destinystats.json');
-      } else {
-        destcheck = false;
-        remover('destiny');
-      }
-  });
-  return Promise.all([fetch1, fetch2, fetch3, fetch4]);
+    })
+  }
 }
-fetcher();
-setInterval(fetcher, 180000);
 
+let ice = new getStreamers('ice', '');
+let tsa = new getStreamers('tsa', '');
+let destiny = new getStreamers('destiny', '');
+let hyphonix = new getStreamers('hyphonix', '');
+
+init();
+function init() {
+ice.getData();
+tsa.getData();
+hyphonix.getData();
+destiny.getData();
+}
 
 function getStats(name) {
   fetch (`../fetches/${name}`)
@@ -91,7 +53,6 @@ const dataset = document.querySelectorAll('.card');
 dataset.forEach(item => {
   if (item.classList.value.includes(astring)) {
   item.children[1].classList.add('active');
-  item.children[1].addEventListener('click', addVideo);
 }
 })
 }
@@ -110,27 +71,11 @@ function remover(stringer) {
 const links = document.querySelectorAll('.pic');
 const video = document.querySelector('.stream');
 const chat = document.querySelector('.chat');
-function addVideo() {
-  const itemclass = this.classList.value;
-if (itemclass.includes('suit')) {
-  const tsaurl = tsajson.items[0].id.videoId;
-  video.src = `https://www.youtube.com/embed/${tsaurl}`;
-  chat.src = `https://www.youtube.com/live_chat?v=${tsaurl}&embed_domain=localhost`;
-}
-if (itemclass.includes('bignose')) {
-    const iceurl = icejson.items[0].id.videoId;
-    video.src = `https://www.youtube.com/embed/${iceurl}`;
-    chat.src = `https://www.youtube.com/live_chat?v=${iceurl}&embed_domain=localhost`;
-  }
-  if (itemclass.includes('dwarf')) {
-    const desturl = destinyjson.items[0].id.videoId;
-    video.src = `https://www.youtube.com/embed/${desturl}`;
-    chat.src = `https://www.youtube.com/live_chat?v=${desturl}&embed_domain=localhost`;
-  }
-  if (itemclass.includes('bald')) {
-    const hyphurl = hyphonixjson.items[0].id.videoId;
-    video.src = `https://www.youtube.com/embed/${hyphurl}`;
-    chat.src = `https://www.youtube.com/live_chat?v=${hyphurl}&embed_domain=localhost`;
-  }
+function addVideo(theName, vidNumb) {
+  const namediv = document.querySelector(`.${theName} card`);
+  namediv.addEventListener('click', () => {
+    video.src = `https://www.youtube.com/embed/${vidNumb}`;
+    chat.src = `https://www.youtube.com/live_chat?v=${vidNumb}&embed_domain=localhost`;
+  })
 }
 

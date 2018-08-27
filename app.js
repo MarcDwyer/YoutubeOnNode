@@ -7,64 +7,40 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 
 //var indexRouter = require('./routes/index');
+class getUser {
+  constructor(name, url) {
+    this.name = name;
+    this.url = url;
+  }
+  getData() {
+    fetch(this.url)
+    .then((res) => res.json())
+    .then(data => {
+      console.log(this.name)
+      const newdata = JSON.stringify(data);
+      fs.writeFile(`public/homepage/fetches/${this.name}.json`, newdata, finished)
+      if (!data.pageInfo.totalResults == 0) {
+        getStats(data.items[0].id.videoId, `${this.name}`);
+      }
+      function finished() {
+        console.log('JSON stored...')
+      }
+    })
+}
+}
 
+let ice = new getUser('ice', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCv9Edl_WbtbPeURPtFDo-uA&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
+let hyphonix = new getUser('hyphonix', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCn0Fbg9fPbtMIh3xUyCDx8g&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
+let tsa = new getUser('tsa', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCB0H_1M78_jwTyfaJuP241g&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
+let destiny = new getUser('destiny', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UC554eY5jNUfDq3yDOJYirOQ&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
 
 fetcher();
-setInterval(fetcher, 180000);
+setInterval(fetcher, 240000)
 function fetcher() {
-  // ice
-  fetch ('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCv9Edl_WbtbPeURPtFDo-uA&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I')
-  .then((res) => res.json())
-  .then((data) => {
-    const newdata = JSON.stringify(data);
-    fs.writeFile('public/homepage/fetches/ice.json', newdata, finished)
-    if (!data.pageInfo.totalResults == 0) {
-      getStats(data.items[0].id.videoId, 'ice');
-    }
-    function finished(err) {
-      console.log('Ice JSON requested and stored');
-    }
-  });
-  //hyphonix
-  fetch ('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCn0Fbg9fPbtMIh3xUyCDx8g&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I')
-  .then((res) => res.json())
-  .then((data) => {
-    const newdata = JSON.stringify(data);
-    fs.writeFile('public/homepage/fetches/hyphonix.json', newdata, finished)
-    if (!data.pageInfo.totalResults == 0) {
-      getStats(data.items[0].id.videoId, 'hyphonix');
-    }
-    function finished(err) {
-      console.log('Hyphonix JSON requested and stored');
-    }
-  })
-    
-  // tsa
-  fetch ('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCB0H_1M78_jwTyfaJuP241g&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I')
-  .then((res) => res.json())
-  .then((data) => {
-    const newdata = JSON.stringify(data);
-    fs.writeFile('public/homepage/fetches/tsa.json', newdata, finished)
-    if (!data.pageInfo.totalResults == 0) {
-      getStats(data.items[0].id.videoId, 'tsa');
-    }
-    function finished(err) {
-      console.log('TSA JSON requested and stored');
-    }
-  });
-  //destiny
-  fetch ('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UC554eY5jNUfDq3yDOJYirOQ&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I')
-  .then((res) => res.json())
-  .then((data) => {
-    const newdata = JSON.stringify(data);
-    fs.writeFile('public/homepage/fetches/destiny.json', newdata, finished)
-    if (!data.pageInfo.totalResults == 0) {
-      getStats(data.items[0].id.videoId, 'destiny');
-    }
-    function finished(err) {
-      console.log('Destiny JSON requested and stored');
-    }
-  });
+  ice.getData();
+  tsa.getData();
+  hyphonix.getData();
+  destiny.getData();
 }
 
 function getStats(vidnum, name) {
