@@ -15,6 +15,7 @@ class getStreamers {
         updater(`${this.name}`);
         addVideo(this.name, vidurl);
         getStats(`${this.name}stats.json`)
+        organizeCards();
       } else {
         remover(`${this.name}`)
       }
@@ -46,6 +47,7 @@ function getStats(name) {
   fetch (`../fetches/${name}`)
   .then((res) => res.json())
   .then((data) => {
+    console.log(data);
     const vidnumber = data.items[0].liveStreamingDetails.concurrentViewers;
     const match = name.split('stats');
     const viddiv = document.querySelector(`.${match[0]} .number`)
@@ -63,7 +65,6 @@ dataset.forEach(item => {
   item.children[1].classList.add('active');
 }
 })
-organizeCards();
 }
 
 function remover(stringer) {
