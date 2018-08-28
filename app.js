@@ -16,10 +16,10 @@ class getUser {
     fetch(this.url)
     .then((res) => res.json())
     .then(data => {
-      console.log(this.name)
       const newdata = JSON.stringify(data);
       fs.writeFile(`public/homepage/fetches/${this.name}.json`, newdata, finished)
       if (!data.pageInfo.totalResults == 0) {
+        console.log(`${this.name} is live!!!`)
         getStats(data.items[0].id.videoId, `${this.name}`);
       }
       function finished() {
@@ -33,16 +33,15 @@ let ice = new getUser('ice', 'https://www.googleapis.com/youtube/v3/search?part=
 let hyphonix = new getUser('hyphonix', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCn0Fbg9fPbtMIh3xUyCDx8g&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
 let tsa = new getUser('tsa', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCB0H_1M78_jwTyfaJuP241g&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
 let destiny = new getUser('destiny', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UC554eY5jNUfDq3yDOJYirOQ&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
-let bjorn = new getUser('bjorn', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCD8GawxPXpJnql466KekVXA-uA&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
-
+let mix = new getUser('mix', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UC_jxnWLGJ2eQK4en3UblKEw&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
 fetcher();
 setInterval(fetcher, 240000)
 function fetcher() {
+  mix.getData();
   ice.getData();
   tsa.getData();
   hyphonix.getData();
   destiny.getData();
-  bjorn.getData();
 }
 
 function getStats(vidnum, name) {
