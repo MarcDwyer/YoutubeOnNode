@@ -33,6 +33,7 @@ let ice = new getUser('ice', 'https://www.googleapis.com/youtube/v3/search?part=
 let hyphonix = new getUser('hyphonix', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCn0Fbg9fPbtMIh3xUyCDx8g&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
 let tsa = new getUser('tsa', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCB0H_1M78_jwTyfaJuP241g&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
 let destiny = new getUser('destiny', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UC554eY5jNUfDq3yDOJYirOQ&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
+let bjorn = new getUser('bjorn', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCD8GawxPXpJnql466KekVXA-uA&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
 
 fetcher();
 setInterval(fetcher, 240000)
@@ -41,6 +42,7 @@ function fetcher() {
   tsa.getData();
   hyphonix.getData();
   destiny.getData();
+  bjorn.getData();
 }
 
 function getStats(vidnum, name) {

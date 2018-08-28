@@ -5,13 +5,12 @@ class getStreamers {
     this.vidid = vidid;
   }
   getData() {
-    console.log(this.name)
     fetch(`fetches/${this.name}.json`)
     .then((res) => res.json())
     .then(data => {
-      const vidurl = data.items[0].id.videoId;
       if (!data.pageInfo.totalResults == 0) {
-        this.vidid = data.items[0].id.videoId
+        const vidurl = data.items[0].id.videoId;
+        this.vidid = vidurl;
         updater(`${this.name}`);
         addVideo(this.name, vidurl);
         getStats(`${this.name}stats.json`)
@@ -26,13 +25,16 @@ let ice = new getStreamers('ice', '');
 let tsa = new getStreamers('tsa', '');
 let destiny = new getStreamers('destiny', '');
 let hyphonix = new getStreamers('hyphonix', '');
+let bjorn = new getStreamers('bjorn', '');
 
 init();
+setInterval(init, 60000)
 function init() {
 ice.getData();
 tsa.getData();
 hyphonix.getData();
 destiny.getData();
+bjorn.getData();
 }
 
 function getStats(name) {
