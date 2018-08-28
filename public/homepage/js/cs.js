@@ -1,36 +1,41 @@
 
 class getStreamers {
-  constructor(name, vidid) {
+  constructor(name, vidid, checker) {
     this.name = name;
     this.vidid = vidid;
+    this.checker = checker;
   }
   getData() {
-    console.log('fetcher..')
     fetch(`fetches/${this.name}.json`)
     .then((res) => res.json())
     .then(data => {
-      if (!data.pageInfo.totalResults == 0) {
+      if (!this.checker && !data.pageInfo.totalResults == 0) {
+        this.checker = true;
         const vidurl = data.items[0].id.videoId;
         this.vidid = vidurl;
         updater(`${this.name}`);
         addVideo(this.name, vidurl);
         getStats(`${this.name}stats.json`)
         organizeCards();
-      } else {
+        return this.vidid;
+      } else if (this.checker && data.pageInfo.totalResults == 0){
+        this.checker = false;
         remover(`${this.name}`)
+      }  else if (this.checker && !data.pageInfo.totalResults == 0) {
+        getStats(`${this.name}stats.json`);
       }
     })
   }
 }
 
-let ice = new getStreamers('ice', '');
-let tsa = new getStreamers('tsa', '');
-let destiny = new getStreamers('destiny', '');
-let hyphonix = new getStreamers('hyphonix', '');
-let mix = new getStreamers('mix', '');
+let ice = new getStreamers('ice', '', checker = false);
+let tsa = new getStreamers('tsa', '', checker = false);
+let destiny = new getStreamers('destiny', '', checker = false);
+let hyphonix = new getStreamers('hyphonix', '', checker = false);
+let mix = new getStreamers('mix', '', checker = false);
 
 init();
-setInterval(init, 60000)
+setInterval(init, 120000)
 
 
 
@@ -44,14 +49,18 @@ destiny.getData();
 }
 
 function getStats(name) {
+  console.log(name);
   fetch (`../fetches/${name}`)
   .then((res) => res.json())
   .then((data) => {
-    console.log(data);
     const vidnumber = data.items[0].liveStreamingDetails.concurrentViewers;
     const match = name.split('stats');
     const viddiv = document.querySelector(`.${match[0]} .number`)
+    if (vidnumber == undefined) {
+      vidnumber = 'Offline'
+    } else {
     viddiv.innerHTML = `<span>${vidnumber} viewers</span>`;
+  }
   })
 }
 
@@ -83,7 +92,7 @@ const links = document.querySelectorAll('.pic');
 const video = document.querySelector('.stream');
 const chat = document.querySelector('.chat');
 function addVideo(theName, vidNumb) {
-  const namediv = document.querySelector(`.${theName}`);
+  const namediv = document.querySelector(`.${theName} img`);
   namediv.addEventListener('click', () => {
     video.src = `https://www.youtube.com/embed/${vidNumb}`;
     chat.src = `https://www.youtube.com/live_chat?v=${vidNumb}&embed_domain=localhost`;
@@ -91,7 +100,6 @@ function addVideo(theName, vidNumb) {
 }
 
 function organizeCards() {
-  console.log('cards running...')
   const moon1 = [...document.querySelectorAll('[data-who]')];
   const thediv = document.querySelector('.orgme');
   const newray = moon1.sort((a, b) => a.classList.length < b.classList.length ? 1 : -1);
