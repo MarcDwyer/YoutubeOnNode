@@ -1,44 +1,46 @@
 
 class getStreamers {
-  constructor(name, vidid, checker, json) {
+  constructor(name, checker, vidid, json) {
     this.name = name;
-    this.vidid = vidid;
     this.checker = checker;
+    this.vidid = vidid;
     this.json = json;
   }
   getData() {
     fetch(`fetches/${this.name}.json`)
     .then((res) => res.json())
     .then(data => {
-      this.json = data;
-      if (!this.checker && !data.pageInfo.totalResults == 0) {
-        this.checker = true;
-        this.vidid = data.items[0].id.videoId;
-        updater(`${this.name}`);
-        addVideo(this.name, this.vidid);
-        getStats(`${this.name}stats.json`)
-        organizeCards();
-      } else if (this.checker && data.pageInfo.totalResults == 0){
-        this.checker = false;
-        remover(`${this.name}`)
-      }  else if (this.checker && !data.pageInfo.totalResults == 0) {
-        getStats(`${this.name}stats.json`);
+        this.json = data;
+        if (!data.pageInfo.totalResults == 0) {
+        this.dataThink();
       }
-    })
+})
+}
+  dataThink() {
+    if (!this.checker && !this.json.pageInfo.totalResults == 0) {
+      this.checker = true;
+      this.vidid = this.json.items[0].id.videoId;
+      updater(this.name);
+      addVideo(this.name, this.vidid);
+      getStats(`${this.name}stats.json`)
+      organizeCards();
+    } else if (this.checker && this.json.pageInfo.totalResults == 0){
+      this.checker = false;
+      remover(`${this.name}`)
+    }  else if (this.checker && !this.json.pageInfo.totalResults == 0) {
+      getStats(`${this.name}stats.json`);
+    }
   }
 }
 
-let ice = new getStreamers('ice',checker = false,);
-let tsa = new getStreamers('tsa',checker = false);
+let ice = new getStreamers('ice', checker = false);
+let tsa = new getStreamers('tsa', checker = false);
 let destiny = new getStreamers('destiny', checker = false);
 let hyphonix = new getStreamers('hyphonix', checker = false);
 let mix = new getStreamers('mix', checker = false);
 
 init();
 setInterval(init, 60000)
-
-
-
 
 function init() {
 mix.getData();
@@ -52,11 +54,11 @@ function getStats(name) {
   fetch (`../fetches/${name}`)
   .then((res) => res.json())
   .then((data) => {
-    const vidnumber = data.items[0].liveStreamingDetails.concurrentViewers;
+    let vidnumber = data.items[0].liveStreamingDetails.concurrentViewers;
     const match = name.split('stats');
     const viddiv = document.querySelector(`.${match[0]} .number`)
     if (vidnumber == undefined) {
-      vidnumber = 'Offline'
+      vidnumber = 'Offline';
     } else {
     viddiv.innerHTML = `<span>${vidnumber} viewers</span>`;
   }
