@@ -35,7 +35,7 @@ let tsa = new getUser('tsa', 'https://www.googleapis.com/youtube/v3/search?part=
 let destiny = new getUser('destiny', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UC554eY5jNUfDq3yDOJYirOQ&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
 let mix = new getUser('mix', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UC_jxnWLGJ2eQK4en3UblKEw&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
 fetcher();
-setInterval(fetcher, 300000)
+setInterval(fetcher, 120000)
 function fetcher() {
   mix.getData();
   ice.getData();

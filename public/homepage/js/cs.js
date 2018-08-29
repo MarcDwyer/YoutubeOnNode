@@ -1,14 +1,17 @@
 
 class getStreamers {
-  constructor(name, vidid, checker) {
+  constructor(name, vidid, checker, json) {
     this.name = name;
     this.vidid = vidid;
     this.checker = checker;
+    this.json = json;
   }
   getData() {
+    console.log('get data running...')
     fetch(`fetches/${this.name}.json`)
     .then((res) => res.json())
     .then(data => {
+      this.json = data;
       if (!this.checker && !data.pageInfo.totalResults == 0) {
         this.checker = true;
         const vidurl = data.items[0].id.videoId;
@@ -28,14 +31,14 @@ class getStreamers {
   }
 }
 
-let ice = new getStreamers('ice', '', checker = false);
-let tsa = new getStreamers('tsa', '', checker = false);
-let destiny = new getStreamers('destiny', '', checker = false);
-let hyphonix = new getStreamers('hyphonix', '', checker = false);
-let mix = new getStreamers('mix', '', checker = false);
+let ice = new getStreamers('ice',checker = false,);
+let tsa = new getStreamers('tsa',checker = false);
+let destiny = new getStreamers('destiny', checker = false);
+let hyphonix = new getStreamers('hyphonix', checker = false);
+let mix = new getStreamers('mix', checker = false);
 
 init();
-setInterval(init, 120000)
+setInterval(init, 30000)
 
 
 
@@ -49,7 +52,6 @@ destiny.getData();
 }
 
 function getStats(name) {
-  console.log(name);
   fetch (`../fetches/${name}`)
   .then((res) => res.json())
   .then((data) => {
