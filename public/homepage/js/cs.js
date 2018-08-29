@@ -7,20 +7,17 @@ class getStreamers {
     this.json = json;
   }
   getData() {
-    console.log('get data running...')
     fetch(`fetches/${this.name}.json`)
     .then((res) => res.json())
     .then(data => {
       this.json = data;
       if (!this.checker && !data.pageInfo.totalResults == 0) {
         this.checker = true;
-        const vidurl = data.items[0].id.videoId;
-        this.vidid = vidurl;
+        this.vidid = data.items[0].id.videoId;
         updater(`${this.name}`);
-        addVideo(this.name, vidurl);
+        addVideo(this.name, this.vidid);
         getStats(`${this.name}stats.json`)
         organizeCards();
-        return this.vidid;
       } else if (this.checker && data.pageInfo.totalResults == 0){
         this.checker = false;
         remover(`${this.name}`)
@@ -38,7 +35,7 @@ let hyphonix = new getStreamers('hyphonix', checker = false);
 let mix = new getStreamers('mix', checker = false);
 
 init();
-setInterval(init, 30000)
+setInterval(init, 60000)
 
 
 
