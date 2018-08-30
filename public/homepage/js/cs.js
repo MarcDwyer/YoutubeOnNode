@@ -1,19 +1,18 @@
 
 class getStreamers {
-  constructor(name, checker, vidid, json) {
+  constructor(name, checker, vidid, json, viewerCount) {
     this.name = name;
     this.checker = checker;
     this.vidid = vidid;
     this.json = json;
+    this.viewerCount = viewerCount;
   }
   getData() {
     fetch(`fetches/${this.name}.json`)
     .then((res) => res.json())
     .then(data => {
         this.json = data;
-        if (!data.pageInfo.totalResults == 0) {
         this.dataThink();
-      }
 })
 }
   dataThink() {
@@ -22,14 +21,27 @@ class getStreamers {
       this.vidid = this.json.items[0].id.videoId;
       updater(this.name);
       addVideo(this.name, this.vidid);
-      getStats(`${this.name}stats.json`)
+      this.getStats()
       organizeCards();
     } else if (this.checker && this.json.pageInfo.totalResults == 0){
       this.checker = false;
-      remover(`${this.name}`)
+      remover(this.name)
     }  else if (this.checker && !this.json.pageInfo.totalResults == 0) {
-      getStats(`${this.name}stats.json`);
+      this.getStats();
     }
+  }
+  getStats() {
+    fetch (`../fetches/${this.name}stats.json`)
+    .then((res) => res.json())
+    .then((data) => {
+      this.viewerCount = data.items[0].liveStreamingDetails.concurrentViewers;
+      const viddiv = document.querySelector(`.${this.name} .number`)
+      if (this.viewerCount == undefined) {
+        this.viewerCount = 'Offline';
+      } else {
+      viddiv.innerHTML = `<span>${this.viewerCount} viewers</span>`;
+    }
+    })
   }
 }
 
@@ -50,25 +62,10 @@ hyphonix.getData();
 destiny.getData();
 }
 
-function getStats(name) {
-  fetch (`../fetches/${name}`)
-  .then((res) => res.json())
-  .then((data) => {
-    let vidnumber = data.items[0].liveStreamingDetails.concurrentViewers;
-    const match = name.split('stats');
-    const viddiv = document.querySelector(`.${match[0]} .number`)
-    if (vidnumber == undefined) {
-      vidnumber = 'Offline';
-    } else {
-    viddiv.innerHTML = `<span>${vidnumber} viewers</span>`;
-  }
-  })
-}
-
 const pics = document.querySelectorAll('.pic');
 
 function updater(astring) {
-const dataset = document.querySelectorAll('.card');
+const dataset = document.querySelectorAll('.carder');
 dataset.forEach(item => {
   if (item.classList.value.includes(astring)) {
   item.classList.add('live');
@@ -78,7 +75,7 @@ dataset.forEach(item => {
 }
 
 function remover(stringer) {
-  const dataset = document.querySelectorAll('.card');
+  const dataset = document.querySelectorAll('.carder');
   dataset.forEach(item => {
     if (item.classList.value.includes(stringer)) {
     item.children[1].classList.remove('active');

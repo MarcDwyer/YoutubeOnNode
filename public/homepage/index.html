@@ -5,33 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Fetcher</title>
     <meta name="description" content="">
-    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
-    <script src="jquery-3.3.1.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel='font awesome' href="node_modules/font-awesome/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Oleo+Script" rel="stylesheet">
     <script type="text/javascript" charset="utf8" async="" src="https://www.youtube.com/iframe_api"></script>
-
-
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Oleo+Script" rel="stylesheet">
+    <link rel="stylesheet" href="node_modules/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <button type="button" class="btn btn-success centered" data-toggle="modal" data-target="#exampleModal">
+    Weekly Poll
+  </button>
 
-  <div id='container'>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Who do I add poll?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body form-group">
+          <form id="vote-form" class="form-check">
+          <p class="form-check">
+            <div>
+            <input type="radio" name="voter" value="Burger" id="burger">
+            <label for="burger">Burger Planet</label>
+          </div>
+          <div>
+            <input type="radio" name="voter" value="Sam Pepper" id="sam">
+            <label for="sam">Sam Pepper</label>
+          </div>
+          <div>
+            <input type="radio" name="voter" value="Bjorn" id="bjorn">
+            <label for="bjorn">Bjorn</label>
+          </div>
+          </p>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <input type="submit" value="Vote" class="btn btn-primary">
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id='container-me'>
     <div class='cards'>
-      <div class='thetitle card'>
-      <h1 class='teetle'> Fetcher </h1>
+      <div class='thetitle mt-4'>
+      <h1> Fetcher </h1>
     </div>
     <div class="orgme">
-  <div class='ice card' data-who="icecheck">
-    <h2 class='name'> Ice Poseidon </h2>
+  <div class='ice carder' data-who="icecheck">
+    <h2 class='namer mt-4'> Ice Poseidon </h2>
     <img class='bignose pic' src='img/ice.jpg' alt='ice pic'>
     <div class="number"><span>Offline</span></div>
     <i class="fa fa-youtube-play" aria-hidden="true"></i>
   </div>
-  <div class='hyphonix card' data-who="hypcheck">
-    <h2 class='name'> Hyphonix</h2>
+  <div class='hyphonix carder' data-who="hypcheck">
+    <h2 class='namer mt-4'> Hyphonix</h2>
     <img class='bald pic' src='img\hyphonix.jpg' alt='hyp'>
     <div class="number"><span>Offline</span></div>
     <div class="social">
@@ -39,20 +72,20 @@
     <i class="fa fa-discord"></i>
     </div>
   </div>
-  <div class='tsa card' data-who="tsacheck">
-    <h2 class='name'> Tracksuit Andy </h2>
+  <div class='tsa carder' data-who="tsacheck">
+    <h2 class='namer mt-4'> Tracksuit Andy </h2>
     <img class='suit pic' src='img\tsa.png' alt='bjorn'>
     <div class="number"><span>Offline</span></div>
     <i class="fa fa-youtube-play"></i>
       </div>
-      <div class='destiny card' data-who="destcheck">
-        <h2 class='name'> Destiny </h2>
+      <div class='destiny carder' data-who="destcheck">
+        <h2 class='namer mt-4'> Destiny </h2>
         <img class='dwarf pic' src='img/destinypls.png'>
         <div class="number"><span>Offline</span></div>
         <i class="fa fa-youtube-play"></i>
       </div>
-      <div class='mix card' data-who="mixcheck">
-        <h2 class='name'> MixHound </h2>
+      <div class='mix carder' data-who="mixcheck">
+        <h2 class='namer mt-4'> MixHound </h2>
         <img class='viking pic' src='img/monster.jpg'>
         <div class="number"><span>Offline</span></div>
         <i class="fa fa-youtube-play"></i>
@@ -62,7 +95,10 @@
     <iframe src="" frameborder="0" class="stream" width="100%" heigh="100%" allowfullscreen="allowfullscreen" allow="autoplay" sandbox="allow-scripts allow-same-origin"></iframe>
     <iframe src="" frameborder="0" class="chat" align="bottom" width="100%" heigh="100%" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-modals" title="Ice Poseidon"></iframe>
       </div>
-</div>
+
+<script src="jquery-3.3.1.js"></script>
+<script type="text/javascript" src="node_modules/bootstrap/popper.min.js"></script>
+<script src="node_modules/bootstrap/bootstrap.min.js"> </script>
 <script src='js/cs.js'></script>
 </body>
 </html>
