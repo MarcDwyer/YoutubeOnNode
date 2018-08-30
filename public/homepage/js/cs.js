@@ -91,7 +91,7 @@ function addVideo(theName, vidNumb) {
   const namediv = document.querySelector(`.${theName} img`);
   namediv.addEventListener('click', () => {
     video.src = `https://www.youtube.com/embed/${vidNumb}`;
-    chat.src = `https://www.youtube.com/live_chat?v=${vidNumb}&embed_domain=localhost`;
+    chat.src = `https://www.youtube.com/live_chat?v=${vidNumb}&embed_domain=46.101.192.206`;
   })
 }
 
