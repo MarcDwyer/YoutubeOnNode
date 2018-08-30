@@ -50,6 +50,8 @@ let tsa = new getStreamers('tsa', checker = false);
 let destiny = new getStreamers('destiny', checker = false);
 let hyphonix = new getStreamers('hyphonix', checker = false);
 let mix = new getStreamers('mix', checker = false);
+let marie = new getStreamers('marie', checker = false);
+let burger = new getStreamers('burger', checker = false);
 
 init();
 setInterval(init, 60000)
@@ -60,29 +62,24 @@ ice.getData();
 tsa.getData();
 hyphonix.getData();
 destiny.getData();
+marie.getData();
+burger.getData();
 }
 
 const pics = document.querySelectorAll('.pic');
 
 function updater(astring) {
-const dataset = document.querySelectorAll('.carder');
-dataset.forEach(item => {
-  if (item.classList.value.includes(astring)) {
-  item.classList.add('live');
-  item.children[1].classList.add('active');
-}
-})
+const item = document.querySelector(`.${astring}  `);
+item.classList.add('live');
+item.children[1].classList.add('active');
+
 }
 
 function remover(stringer) {
-  const dataset = document.querySelectorAll('.carder');
-  dataset.forEach(item => {
-    if (item.classList.value.includes(stringer)) {
-    item.children[1].classList.remove('active');
-    item.classList.remove('live');
-    item.querySelector('.pic').removeEventListener('click', addVideo);
-  }
-  })
+  const item = document.querySelector(`${stringer} `);
+  item.classList.remove('live');
+  item.children[1].classList.remove('active');
+  item.children[1].removeEventListener('click', addVideo);
 }
 
 
