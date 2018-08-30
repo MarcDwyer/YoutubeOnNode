@@ -75,6 +75,7 @@ html, body {
  }
 
 .pic {
+  border: solid transparent 3px;
   height: 85px;
   width: 85px;
   border-radius: 50%;
@@ -95,7 +96,7 @@ html, body {
 
 .active {
   cursor: pointer;
-  border: solid 3px #FF0000;
+  border: solid red 3px;
   animation: pulse 3s linear infinite; }
 
 @keyframes pulse {
@@ -118,7 +119,7 @@ html, body {
  }
 
   .number {
-    margin-top: 5px;
+    margin-top: 10px;
 
   }
 

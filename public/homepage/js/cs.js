@@ -8,42 +8,43 @@ class getStreamers {
     this.viewerCount = viewerCount;
   }
   getData() {
-    fetch(`fetches/${this.name}.json`)
-    .then((res) => res.json())
-    .then(data => {
-        this.json = data;
-        this.dataThink();
-})
-}
+      fetch(`fetches/${this.name}.json`)
+      .then((res) => res.json())
+      .then(data => {
+          this.json = data;
+          this.dataThink();
+  })
+    }
   dataThink() {
-    if (!this.checker && !this.json.pageInfo.totalResults == 0) {
-      this.checker = true;
-      this.vidid = this.json.items[0].id.videoId;
-      updater(this.name);
-      addVideo(this.name, this.vidid);
-      this.getStats()
-      organizeCards();
-    } else if (this.checker && this.json.pageInfo.totalResults == 0){
-      this.checker = false;
-      remover(this.name)
-    }  else if (this.checker && !this.json.pageInfo.totalResults == 0) {
-      this.getStats();
+      if (!this.checker && !this.json.pageInfo.totalResults == 0) {
+        this.checker = true;
+        this.vidid = this.json.items[0].id.videoId;
+        updater(this.name);
+        addVideo(this.name, this.vidid);
+        this.getStats();
+      } else if (this.checker && this.json.pageInfo.totalResults == 0){
+        this.checker = false;
+        remover(this.name)
+      }  else if (this.checker && !this.json.pageInfo.totalResults == 0) {
+        this.getStats();
+      }
     }
-  }
   getStats() {
-    fetch (`../fetches/${this.name}stats.json`)
-    .then((res) => res.json())
-    .then((data) => {
-      this.viewerCount = data.items[0].liveStreamingDetails.concurrentViewers;
-      const viddiv = document.querySelector(`.${this.name} .number`)
-      if (this.viewerCount == undefined) {
-        this.viewerCount = 'Offline';
-      } else {
-      viddiv.innerHTML = `<span>${this.viewerCount} viewers</span>`;
-    }
-    })
+fetch (`../fetches/${this.name}stats.json`)
+       .then((res) => res.json())
+       .then((data) => {
+         this.viewerCount = data.items[0].liveStreamingDetails.concurrentViewers;
+         const viddiv = document.querySelector(`.${this.name} `);
+        viddiv.dataset.viewer = this.viewerCount;
+         if (this.viewerCount == undefined) {
+           this.viewerCount = 'Offline';
+         } else {
+         viddiv.querySelector('.number').textContent = `${this.viewerCount} viewers`;
+       }
+     }).then(organizeCards);
   }
 }
+
 
 let ice = new getStreamers('ice', checker = false);
 let tsa = new getStreamers('tsa', checker = false);
@@ -54,7 +55,7 @@ let marie = new getStreamers('marie', checker = false);
 let burger = new getStreamers('burger', checker = false);
 
 init();
-setInterval(init, 60000)
+setInterval(init, 120000)
 
 function init() {
 mix.getData();
@@ -69,7 +70,7 @@ burger.getData();
 const pics = document.querySelectorAll('.pic');
 
 function updater(astring) {
-const item = document.querySelector(`.${astring}  `);
+const item = document.querySelector(`.${astring} `);
 item.classList.add('live');
 item.children[1].classList.add('active');
 
@@ -95,9 +96,13 @@ function addVideo(theName, vidNumb) {
 }
 
 function organizeCards() {
-  const moon1 = [...document.querySelectorAll('[data-who]')];
-  const thediv = document.querySelector('.orgme');
-  const newray = moon1.sort((a, b) => a.classList.length < b.classList.length ? 1 : -1);
-  thediv.innerHTML = '';
-  thediv.append(...newray);
+const getCards = [...document.querySelectorAll('[data-viewer]')];
+const thediv = document.querySelector('.orgme');
+const newray = getCards.sort((a, b) => {
+  return a.dataset.viewer < b.dataset.viewer ? 1 : -1;
+});
+
+thediv.innerHTML = '';
+thediv.append(...newray);
+
 }
