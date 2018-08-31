@@ -55,7 +55,7 @@ let marie = new getStreamers('marie', checker = false);
 let burger = new getStreamers('burger', checker = false);
 
 init();
-setInterval(init, 120000)
+setInterval(init, 80000)
 
 function init() {
 mix.getData();
