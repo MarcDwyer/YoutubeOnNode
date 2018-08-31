@@ -137,7 +137,7 @@ html, body {
     order: 2;
     width: 350px;
     height: 100%;
-    transition: 0.5s ease;
+    transition: 0.3s ease;
   }
 
   h1, h2 {
@@ -169,17 +169,19 @@ width: 550px;
 background-color: #eee;
 }
 
-[data-toggle="modal"] {
-  height: auto;
-  top: 0; left: 50%;  right: 0;
-  position: absolute;
-  margin: auto;
-}
-
 .form-check {
   display: grid;
 }
 
 .closetime {
   width: 0;
+}
+.keepbuttons {
+  position: absolute;
+  top:0;
+  right:0;
+}
+.buttorg {
+  margin-right: auto;
+  margin-left: auto;
 }

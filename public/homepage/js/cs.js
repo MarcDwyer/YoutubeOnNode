@@ -107,11 +107,14 @@ thediv.append(...newray);
 
 }
 
-const togglechat = document.querySelector('.btn-danger');
-const primediv = document.querySelector('.chatter');
+
+
+const togglechat = document.querySelector('.buttorg .btn-danger');
+const btndiv = document.querySelector('.buttorg');
+const chatter = document.querySelector('.chatter');
 togglechat.addEventListener('click', toggleChat);
 
 function toggleChat() {
-  console.log(primediv);
-primediv.classList.toggle('closetime');
+  chatter.classList.toggle('closetime');
+  btndiv.classList.toggle('keepbuttons');
 }
