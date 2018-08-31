@@ -135,7 +135,7 @@ html, body {
     display: flex;
     flex-direction: column;
     order: 2;
-    width: 350px;
+    width: 450px;
     height: 100%;
     transition: 0.3s ease;
   }
