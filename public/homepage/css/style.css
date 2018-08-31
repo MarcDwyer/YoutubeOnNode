@@ -11,18 +11,14 @@ html, body {
   flex-wrap: nowrap;
   width: 100%;
   height: 100%;
-  margin-left: auto;
-  margin-right: auto;
   color: #eee;
   font-family: 'Roboto', sans-serif;
 }
 
 .cards {
-  width: 350px;
+  flex: 0 0 275px;
   display: flex;
   flex-direction: column;
-  top: 0;
-  left: 0;
   height: 100%;
   overflow-Y: auto;
   overflow-X: hidden;
@@ -178,10 +174,15 @@ background-color: #eee;
 }
 .keepbuttons {
   position: absolute;
+  z-index: 1;
+  max-width: 120px;
   top:0;
   right:0;
 }
 .buttorg {
+  width: 100%;
+  display:grid;
   margin-right: auto;
   margin-left: auto;
+  transition: 0.3s ease;
 }
