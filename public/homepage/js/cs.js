@@ -91,7 +91,7 @@ function addVideo(theName, vidNumb) {
   const namediv = document.querySelector(`.${theName} img`);
   namediv.addEventListener('click', () => {
     video.src = `https://www.youtube.com/embed/${vidNumb}`;
-    chat.src = `https://www.youtube.com/live_chat?v=${vidNumb}&embed_domain=www.fetcherapp.net`;
+    chat.src = `https://www.youtube.com/live_chat?v=${vidNumb}&embed_domain=www.fetcherapp.net, fetcherapp.net`;
   })
 }
 
@@ -105,4 +105,13 @@ const newray = getCards.sort((a, b) => {
 thediv.innerHTML = '';
 thediv.append(...newray);
 
+}
+
+const togglechat = document.querySelector('.btn-danger');
+const primediv = document.querySelector('.chatter');
+togglechat.addEventListener('click', toggleChat);
+
+function toggleChat() {
+  console.log(primediv);
+primediv.classList.toggle('closetime');
 }
