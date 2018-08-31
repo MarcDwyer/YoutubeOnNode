@@ -99,7 +99,7 @@ function organizeCards() {
 const getCards = [...document.querySelectorAll('[data-viewer]')];
 const thediv = document.querySelector('.orgme');
 const newray = getCards.sort((a, b) => {
-  return a.dataset.viewer < b.dataset.viewer ? 1 : -1;
+  return +a.dataset.viewer < +b.dataset.viewer ? 1 : -1;
 });
 
 thediv.innerHTML = '';
