@@ -10,9 +10,10 @@ const fetch = require('node-fetch');
 const poll =  require('./routes/poll.js');
 //var indexRouter = require('./routes/index');
 class getUser {
-  constructor(name, url) {
+  constructor(name, url, vidid) {
     this.name = name;
     this.url = url;
+    this.videoid = vidid;
   }
   getData() {
     fetch(this.url)
@@ -21,13 +22,17 @@ class getUser {
       const newdata = JSON.stringify(data);
       fs.writeFile(`public/homepage/fetches/${this.name}.json`, newdata, finished)
       if (!data.pageInfo.totalResults == 0) {
-        console.log(`${this.name} is live!!!`)
-        getStats(data.items[0].id.videoId, `${this.name}`);
+      this.videoid = data.items[0].id.videoId;
+      console.log(this.videoid , data.items[0].id.videoId)
       }
       function finished() {
         console.log('JSON stored...')
       }
-    })
+    }).then(() => {
+      if (this.videoid == undefined) return;
+      getStats(this.videoid, this.name);
+    });
+
 }
 }
 
@@ -40,7 +45,7 @@ let marie = new getUser('marie', 'https://www.googleapis.com/youtube/v3/search?p
 let burger = new getUser('burger', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCJNILr75xb9zKpUI0RV7pmQ&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
 
 fetcher();
-setInterval(fetcher, 180000)
+setInterval(fetcher, 240000)
 function fetcher() {
   mix.getData();
   ice.getData();
@@ -52,6 +57,7 @@ function fetcher() {
 }
 
 function getStats(vidnum, name) {
+  console.log(vidnum);
   fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics%2CliveStreamingDetails&id=${vidnum}&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I`)
   .then((res) => res.json())
   .then((data) => {
