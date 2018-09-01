@@ -52,8 +52,9 @@ fetch (`../fetches/${this.name}stats.json`)
   addLinks() {
     const appenddiv = document.querySelector(`.${this.name}`);
     const alink = document.createElement('a');
-    alink.href = `https://www.youtube.com/channel/${this.channelId}`;
-    alink.target = 'target="_blank"';
+    const vidurl = `https://www.youtube.com/channel/${this.channelId}`;
+    alink.href = vidurl;
+    alink.target = "_blank"
     alink.innerHTML = '<i class="fa fa-youtube-play"></i>';
     appenddiv.append(alink);
     this.count++;
