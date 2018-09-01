@@ -93,7 +93,7 @@ function addVideo(theName, vidNumb) {
   namediv.addEventListener('click', () => {
     if(window.innerWidth < 751) return;
     video.src = `https://www.youtube.com/embed/${vidNumb}`;
-    chat.src = `https://www.youtube.com/live_chat?v=${vidNumb}&embed_domain=www.fetcherapp.net`;
+    chat.src = `https://www.youtube.com/live_chat?v=${vidNumb}&embed_domain=fetcherapp.net`;
   })
 }
 
