@@ -50,7 +50,7 @@ fetch (`../fetches/${this.name}stats.json`)
   addLinks() {
     const appenddiv = document.querySelector(`.${this.name}`);
     const alink = document.createElement('a');
-    const vidurl = `https://www.youtube.com/watch?v=${this.channelId}`;
+    const vidurl = `https://www.youtube.com/channel/${this.channelId}`;
     alink.href = vidurl;
     alink.target = "_blank"
     alink.innerHTML = '<i class="fa fa-youtube-play"></i>';
