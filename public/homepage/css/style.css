@@ -128,8 +128,7 @@ html, body {
   }
 
   .chatter {
-    display: flex;
-    flex-direction: column;
+    display: block;
     background-color: #212121;
     order: 2;
     width: 450px;
@@ -182,8 +181,8 @@ background-color: #eee;
   right:0;
 }
 .buttorg {
-  width: 100%;
   display:grid;
+  width: 100%;
   margin-right: auto;
   margin-left: auto;
   transition: 0.3s ease;
