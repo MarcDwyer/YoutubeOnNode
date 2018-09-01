@@ -14,9 +14,7 @@ class getStreamers {
       .then((res) => res.json())
       .then(data => {
           this.json = data;
-          if(this.count == 0) {
-            this.addLinks()
-          }
+          if (this.count == 0) this.addLinks();
           this.dataThink();
   })
     }
@@ -52,7 +50,7 @@ fetch (`../fetches/${this.name}stats.json`)
   addLinks() {
     const appenddiv = document.querySelector(`.${this.name}`);
     const alink = document.createElement('a');
-    const vidurl = `https://www.youtube.com/channel/${this.channelId}`;
+    const vidurl = `https://www.youtube.com/watch?v=${this.channelId}`;
     alink.href = vidurl;
     alink.target = "_blank"
     alink.innerHTML = '<i class="fa fa-youtube-play"></i>';
@@ -71,7 +69,7 @@ let marie = new getStreamers('marie', checker = false, 'UC16fss-5fnGp2Drqp1iT9pA
 let burger = new getStreamers('burger', checker = false, 'UCJNILr75xb9zKpUI0RV7pmQ');
 
 init();
-setInterval(init, 10000);
+setInterval(init, 120000);
 
 function init() {
 mix.getData();
