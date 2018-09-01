@@ -140,10 +140,11 @@ html, body {
     font-family: 'Oleo Script', cursive;
     font-size: 28px;
   }
-h1 {
-  font-size: 40px;
+.thetitle h1 {
+  font-size: 50px;
 }
 .thetitle {
+  display: grid;
   text-align: center;
 }
   ::-webkit-scrollbar {
@@ -185,4 +186,8 @@ background-color: #eee;
   margin-right: auto;
   margin-left: auto;
   transition: 0.3s ease;
+}
+.copyright {
+  font-size: 11px;
+  margin-bottom: 12px;
 }
