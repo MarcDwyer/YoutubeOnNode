@@ -137,6 +137,9 @@ html, body {
     transition: 0.3s ease;
     border-radius: 5px;
   }
+  .chat {
+    height: 100%;
+  }
 
   h1, h2 {
     font-family: 'Oleo Script', cursive;
