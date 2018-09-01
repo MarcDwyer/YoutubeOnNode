@@ -77,7 +77,7 @@ item.querySelector('.fa').style.color = 'red';
 }
 
 function remover(stringer) {
-  const item = document.querySelector(`${stringer} `);
+  const item = document.querySelector(`.${stringer} `);
   item.classList.remove('live');
   item.children[1].classList.remove('active');
   item.querySelector('.fa').style.color = '#eee';

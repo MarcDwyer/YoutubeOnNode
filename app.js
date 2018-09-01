@@ -23,7 +23,6 @@ class getUser {
       fs.writeFile(`public/homepage/fetches/${this.name}.json`, newdata, finished)
       if (!data.pageInfo.totalResults == 0) {
       this.videoid = data.items[0].id.videoId;
-      console.log(this.videoid , data.items[0].id.videoId)
       }
       function finished() {
         console.log('JSON stored...')
@@ -57,14 +56,12 @@ function fetcher() {
 }
 
 function getStats(vidnum, name) {
-  console.log(vidnum);
   fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics%2CliveStreamingDetails&id=${vidnum}&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I`)
   .then((res) => res.json())
   .then((data) => {
     const newdata = JSON.stringify(data);
     fs.writeFile(`public/homepage/fetches/${name}stats.json`, newdata, finished)
     function finished(err) {
-      console.log(`Stats have been applied..`);
     }
   })
 }
