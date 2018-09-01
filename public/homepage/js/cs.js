@@ -1,17 +1,22 @@
 
 class getStreamers {
-  constructor(name, checker, vidid, json, viewerCount) {
+  constructor(name, checker, channelId, vidid, json, viewerCount) {
     this.name = name;
     this.checker = checker;
     this.vidid = vidid;
     this.json = json;
     this.viewerCount = viewerCount;
+    this.channelId = channelId;
+    this.count = 0;
   }
   getData() {
       fetch(`fetches/${this.name}.json`)
       .then((res) => res.json())
       .then(data => {
           this.json = data;
+          if(this.count == 0) {
+            this.addLinks()
+          }
           this.dataThink();
   })
     }
@@ -24,6 +29,7 @@ class getStreamers {
         this.getStats();
       } else if (this.checker && this.json.pageInfo.totalResults == 0){
         this.checker = false;
+        organizeCards();
         remover(this.name)
       }  else if (this.checker && !this.json.pageInfo.totalResults == 0) {
         this.getStats();
@@ -41,21 +47,30 @@ fetch (`../fetches/${this.name}stats.json`)
          } else {
          viddiv.querySelector('.number').textContent = `${this.viewerCount} viewers`;
        }
-     }).then(organizeCards);
+     }).then(organizeCards)
+  }
+  addLinks() {
+    const appenddiv = document.querySelector(`.${this.name}`);
+    const alink = document.createElement('a');
+    alink.href = `https://www.youtube.com/channel/${this.channelId}`;
+    alink.target = 'target="_blank"';
+    alink.innerHTML = '<i class="fa fa-youtube-play"></i>';
+    appenddiv.append(alink);
+    this.count++;
   }
 }
 
 
-let ice = new getStreamers('ice', checker = false);
-let tsa = new getStreamers('tsa', checker = false);
-let destiny = new getStreamers('destiny', checker = false);
-let hyphonix = new getStreamers('hyphonix', checker = false);
-let mix = new getStreamers('mix', checker = false);
-let marie = new getStreamers('marie', checker = false);
-let burger = new getStreamers('burger', checker = false);
+let ice = new getStreamers('ice', checker = false, 'UCv9Edl_WbtbPeURPtFDo-uA');
+let tsa = new getStreamers('tsa', checker = false, 'UCB0H_1M78_jwTyfaJuP241g');
+let destiny = new getStreamers('destiny', checker = false, 'UC554eY5jNUfDq3yDOJYirOQ');
+let hyphonix = new getStreamers('hyphonix', checker = false, 'UCn0Fbg9fPbtMIh3xUyCDx8g');
+let mix = new getStreamers('mix', checker = false, 'UC_jxnWLGJ2eQK4en3UblKEw');
+let marie = new getStreamers('marie', checker = false, 'UC16fss-5fnGp2Drqp1iT9pA');
+let burger = new getStreamers('burger', checker = false, 'UCJNILr75xb9zKpUI0RV7pmQ');
 
 init();
-setInterval(init, 120000)
+setInterval(init, 10000);
 
 function init() {
 mix.getData();
@@ -74,6 +89,7 @@ const item = document.querySelector(`.${astring} `);
 item.classList.add('live');
 item.children[1].classList.add('active');
 item.querySelector('.fa').style.color = 'red';
+
 }
 
 function remover(stringer) {
@@ -81,6 +97,7 @@ function remover(stringer) {
   item.classList.remove('live');
   item.children[1].classList.remove('active');
   item.querySelector('.fa').style.color = '#eee';
+  item.querySelector('.number').textContent = 'Offline';
   item.children[1].removeEventListener('click', addVideo);
 }
 

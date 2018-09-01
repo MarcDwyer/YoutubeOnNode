@@ -10,13 +10,13 @@ const fetch = require('node-fetch');
 const poll =  require('./routes/poll.js');
 //var indexRouter = require('./routes/index');
 class getUser {
-  constructor(name, url, vidid) {
+  constructor(name, channelId, vidid) {
     this.name = name;
-    this.url = url;
+    this.channelId = channelId;
     this.videoid = vidid;
   }
   getData() {
-    fetch(this.url)
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${this.channelId}&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I`)
     .then((res) => res.json())
     .then(data => {
       const newdata = JSON.stringify(data);
@@ -35,13 +35,13 @@ class getUser {
 }
 }
 
-let ice = new getUser('ice', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCv9Edl_WbtbPeURPtFDo-uA&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
-let hyphonix = new getUser('hyphonix', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCn0Fbg9fPbtMIh3xUyCDx8g&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
-let tsa = new getUser('tsa', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCB0H_1M78_jwTyfaJuP241g&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
-let destiny = new getUser('destiny', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UC554eY5jNUfDq3yDOJYirOQ&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
-let mix = new getUser('mix', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UC_jxnWLGJ2eQK4en3UblKEw&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
-let marie = new getUser('marie', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UC16fss-5fnGp2Drqp1iT9pA&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
-let burger = new getUser('burger', 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCJNILr75xb9zKpUI0RV7pmQ&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I');
+let ice = new getUser('ice', 'UCv9Edl_WbtbPeURPtFDo-uA');
+let hyphonix = new getUser('hyphonix', 'UCn0Fbg9fPbtMIh3xUyCDx8g');
+let tsa = new getUser('tsa', 'UCB0H_1M78_jwTyfaJuP241g');
+let destiny = new getUser('destiny', 'UC554eY5jNUfDq3yDOJYirOQ');
+let mix = new getUser('mix', 'UC_jxnWLGJ2eQK4en3UblKEw');
+let marie = new getUser('marie', 'UC16fss-5fnGp2Drqp1iT9pA');
+let burger = new getUser('burger', 'UCJNILr75xb9zKpUI0RV7pmQ');
 
 fetcher();
 setInterval(fetcher, 240000)
