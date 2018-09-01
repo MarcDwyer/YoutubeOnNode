@@ -73,13 +73,14 @@ function updater(astring) {
 const item = document.querySelector(`.${astring} `);
 item.classList.add('live');
 item.children[1].classList.add('active');
-
+item.querySelector('.fa').style.color = 'red';
 }
 
 function remover(stringer) {
   const item = document.querySelector(`${stringer} `);
   item.classList.remove('live');
   item.children[1].classList.remove('active');
+  item.querySelector('.fa').style.color = '#eee';
   item.children[1].removeEventListener('click', addVideo);
 }
 
@@ -90,6 +91,7 @@ const chat = document.querySelector('.chat');
 function addVideo(theName, vidNumb) {
   const namediv = document.querySelector(`.${theName} img`);
   namediv.addEventListener('click', () => {
+    if(window.innerWidth < 751) return;
     video.src = `https://www.youtube.com/embed/${vidNumb}`;
     chat.src = `https://www.youtube.com/live_chat?v=${vidNumb}&embed_domain=www.fetcherapp.net`;
   })
@@ -101,17 +103,15 @@ const thediv = document.querySelector('.orgme');
 const newray = getCards.sort((a, b) => {
   return +a.dataset.viewer < +b.dataset.viewer ? 1 : -1;
 });
-
 thediv.innerHTML = '';
 thediv.append(...newray);
-
 }
-
 
 
 const togglechat = document.querySelector('.buttorg .btn-danger');
 const btndiv = document.querySelector('.buttorg');
 const chatter = document.querySelector('.chatter');
+
 togglechat.addEventListener('click', toggleChat);
 
 function toggleChat() {

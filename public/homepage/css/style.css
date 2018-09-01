@@ -191,3 +191,23 @@ background-color: #eee;
   font-size: 11px;
   margin-bottom: 12px;
 }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+    color: red;
+    text-decoration: none;
+}
+@media only screen and (max-width: 750px) {
+  .cards {
+    flex: 0 0 100%;
+  }
+  .chatter {
+    display: none;
+  }
+  .stream {
+    display: none;
+  }
+}
