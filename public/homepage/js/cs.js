@@ -107,13 +107,14 @@ const chat = document.querySelector('.chat');
 function addVideo(theName, vidNumb) {
   const namediv = document.querySelector(`.${theName} img`);
   const url = window.location.hostname;
-  console.log(url)
-  namediv.addEventListener('click', () => {
-    if(window.innerWidth < 850) return;
-    video.src = `https://www.youtube.com/embed/${vidNumb}`;
-    chat.src = `https://www.youtube.com/live_chat?v=${vidNumb}&embed_domain=${url}`;
-  })
-}
+    namediv.addEventListener('click', () => {
+      if(window.innerWidth > 850) {
+      video.src = `https://www.youtube.com/embed/${vidNumb}`;
+      chat.src = `https://www.youtube.com/live_chat?v=${vidNumb}&embed_domain=${url}`;
+    }
+    })
+  }
+
 
 function organizeCards() {
 const getCards = [...document.querySelectorAll('[data-viewer]')];
