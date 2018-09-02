@@ -27,8 +27,11 @@ class getStreamers {
         this.getStats();
       } else if (this.checker && this.json.pageInfo.totalResults == 0){
         this.checker = false;
+        const viddiv = document.querySelector(`.${this.name} `);
+        this.viewerCount = 0;
+        viddiv.dataset.viewer = this.viewerCount;
+        remover(this.name);
         organizeCards();
-        remover(this.name)
       }  else if (this.checker && !this.json.pageInfo.totalResults == 0) {
         this.getStats();
       }
@@ -97,7 +100,6 @@ function remover(stringer) {
   item.children[1].classList.remove('active');
   item.querySelector('.fa').style.color = '#eee';
   item.querySelector('.number').textContent = 'Offline';
-  item.children[1].removeEventListener('click', addVideo);
 }
 
 
