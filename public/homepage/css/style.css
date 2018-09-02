@@ -181,6 +181,7 @@ background-color: #eee;
 }
 .keepbuttons {
   position: absolute;
+  display: grid;
   z-index: 1;
   max-width: 120px;
   top:0;
