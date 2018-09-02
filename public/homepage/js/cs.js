@@ -96,8 +96,9 @@ item.querySelector('.fa').style.color = 'red';
 
 function remover(stringer) {
   const item = document.querySelector(`.${stringer} `);
+  const removeme = item.querySelector('a').children[0] || item.children[1];
   item.classList.remove('live');
-  item.children[1].classList.remove('active');
+  removeme.classList.remove('active');
   item.querySelector('.fa').style.color = '#eee';
   item.querySelector('.number').textContent = 'Offline';
 }
@@ -109,12 +110,17 @@ const chat = document.querySelector('.chat');
 function addVideo(theName, vidNumb) {
   const namediv = document.querySelector(`.${theName} img`);
   const url = window.location.hostname;
+  if (window.innerWidth > 850) {
     namediv.addEventListener('click', () => {
-      if(window.innerWidth > 850) {
       video.src = `https://www.youtube.com/embed/${vidNumb}`;
       chat.src = `https://www.youtube.com/live_chat?v=${vidNumb}&embed_domain=${url}`;
-    }
     })
+  } else {
+    const href = `https://www.youtube.com/watch?v=${vidNumb}`;
+    const target = "_blank";
+    const itemdiv = document.querySelector(`.${theName}`);
+   $(namediv).wrap(`<a class='linkme' href=${href} target=${target}></a>`);
+  }
   }
 
 

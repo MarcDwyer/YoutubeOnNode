@@ -206,6 +206,9 @@ a:hover {
     color: red;
     text-decoration: none;
 }
+.linkme {
+  width: 100%:
+}
 @media only screen and (max-width: 850px) {
   .cards {
     flex: 0 0 100%;
