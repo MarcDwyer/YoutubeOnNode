@@ -96,9 +96,12 @@ item.querySelector('.fa').style.color = 'red';
 
 function remover(stringer) {
   const item = document.querySelector(`.${stringer} `);
-  const removeme = item.querySelector('a').children[0] || item.children[1];
+  const removeme = item.querySelector('.linkme') !== null;
+  if (removeme) {
+    item.querySelector('.linkme').children[0].classList.remove('active')
+  }
   item.classList.remove('live');
-  removeme.classList.remove('active');
+  item.children[1].classList.remove('active');
   item.querySelector('.fa').style.color = '#eee';
   item.querySelector('.number').textContent = 'Offline';
 }
