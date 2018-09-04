@@ -98,7 +98,10 @@ function remover(stringer) {
   const item = document.querySelector(`.${stringer} `);
   const removeme = item.querySelector('.linkme') !== null;
   if (removeme) {
-    item.querySelector('.linkme').children[0].classList.remove('active')
+    item.querySelector('.linkme').children[0].classList.remove('active');
+    item.classList.remove('live');
+    item.querySelector('.fa').style.color = '#eee';
+    item.querySelector('.number').textContent = 'Offline';
   }
   item.classList.remove('live');
   item.children[1].classList.remove('active');
