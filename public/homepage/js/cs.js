@@ -72,7 +72,7 @@ let marie = new getStreamers('marie', checker = false, 'UC16fss-5fnGp2Drqp1iT9pA
 let burger = new getStreamers('burger', checker = false, 'UCJNILr75xb9zKpUI0RV7pmQ');
 
 init();
-setInterval(init, 120000);
+setInterval(init, 60000);
 
 function init() {
 mix.getData();

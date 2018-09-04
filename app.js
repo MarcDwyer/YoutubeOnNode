@@ -44,7 +44,7 @@ let marie = new getUser('marie', 'UC16fss-5fnGp2Drqp1iT9pA');
 let burger = new getUser('burger', 'UCJNILr75xb9zKpUI0RV7pmQ');
 
 fetcher();
-setInterval(fetcher, 240000)
+setInterval(fetcher, 120000)
 function fetcher() {
   mix.getData();
   ice.getData();
