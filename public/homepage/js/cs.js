@@ -69,6 +69,7 @@ let hyphonix = new getStreamers('hyphonix', checker = false, 'UCn0Fbg9fPbtMIh3xU
 let mix = new getStreamers('mix', checker = false, 'UC_jxnWLGJ2eQK4en3UblKEw');
 let marie = new getStreamers('marie', checker = false, 'UC16fss-5fnGp2Drqp1iT9pA');
 let burger = new getStreamers('burger', checker = false, 'UCJNILr75xb9zKpUI0RV7pmQ');
+let bear = new getStreamers('bear', checker = false, 'UC2Sk0aXLq3ADkH_USGPKT_Q');
 
 init();
 setInterval(init, 60000);
@@ -81,6 +82,7 @@ hyphonix.getData();
 destiny.getData();
 marie.getData();
 burger.getData();
+bear.getData();
 }
 
 const pics = document.querySelectorAll('.pic');
