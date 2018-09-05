@@ -134,7 +134,7 @@ html, body {
     flex-direction: column;
     background-color: #212121;
     order: 2;
-    width:750px;
+    width:725px;
     transition: 0.3s ease;
     border-radius: 5px;
   }
