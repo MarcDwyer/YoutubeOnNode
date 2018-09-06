@@ -69,7 +69,7 @@ fetch (`../fetches/${this.name}stats.json`)
 let ice = new getStreamers('ice', checker = false, 'UCv9Edl_WbtbPeURPtFDo-uA');
 let tsa = new getStreamers('tsa', checker = false, 'UCB0H_1M78_jwTyfaJuP241g');
 let destiny = new getStreamers('destiny', checker = false, 'UC554eY5jNUfDq3yDOJYirOQ');
-let hyphonix = new getStreamers('hyphonix', checker = false, 'UCn0Fbg9fPbtMIh3xUyCDx8g');
+let hyphonix = new getStreamers('hyphonix', checker = false, 'UC4abN4ZiybnsAXTkTBX7now');
 let mix = new getStreamers('mix', checker = false, 'UC_jxnWLGJ2eQK4en3UblKEw');
 let marie = new getStreamers('marie', checker = false, 'UC16fss-5fnGp2Drqp1iT9pA');
 let burger = new getStreamers('burger', checker = false, 'UCJNILr75xb9zKpUI0RV7pmQ');
