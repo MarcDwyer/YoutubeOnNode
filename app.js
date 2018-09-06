@@ -44,7 +44,6 @@ let mix = new getUser('mix', 'UC_jxnWLGJ2eQK4en3UblKEw');
 let marie = new getUser('marie', 'UC16fss-5fnGp2Drqp1iT9pA');
 let burger = new getUser('burger', 'UCJNILr75xb9zKpUI0RV7pmQ');
 
-
 fetcher();
 setInterval(fetcher, 120000)
 function fetcher() {
@@ -55,7 +54,6 @@ function fetcher() {
   destiny.getData();
   marie.getData();
   burger.getData();
-
 }
 
 function getStats(vidnum, name) {
