@@ -9,6 +9,7 @@
     "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",
+    "create-react-app": "^1.5.2",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "font-awesome": "^4.7.0",

@@ -31,8 +31,13 @@ html, body {
 .thetitle {
   order: 0;
   width:100%;
-  text-align: center;
   border-bottom: solid 1px black;
+}
+.thetitle h2 {
+  order: 0;
+  width: 85%;
+  margin: 0;
+  padding: 0;
 }
 
 .ice {
@@ -109,20 +114,21 @@ html, body {
     box-shadow: 0px 0px 0px 0px rgba(255, 0, 0, 0); }
   }
 
-.stream {
+.video {
   order:1;
   height: 100%;
-  border-color: black;
   border-radius: 3px;
   width: 100%;
-
+ }
+ .stream {
+   margin: auto;
+  height: 90%;
  }
 
   .number {
     margin-top: 10px;
 
   }
-
   .hello {
     height: 45px;
     width: 45px;
@@ -134,7 +140,7 @@ html, body {
     flex-direction: column;
     background-color: #212121;
     order: 2;
-    width:750px;
+    width: 750px;
     transition: 0.3s ease;
     border-radius: 5px;
   }
@@ -208,12 +214,7 @@ a:hover {
     text-decoration: none;
 }
 .linkme {
-  width: 100%:
-}
-.fa-arrow-left {
-  display:inline-flex;
-  z-index: 1;
-  cursor: pointer;
+  width: 100%;
 }
 @media only screen and (max-width: 850px) {
   .cards {

@@ -121,6 +121,7 @@ function addVideo(theName, vidNumb) {
   const url = window.location.hostname;
   if (window.innerWidth > 850) {
     namediv.addEventListener('click', () => {
+      document.body.style.backgroundColor = 'black';
       video.src = `https://www.youtube.com/embed/${vidNumb}`;
       chat.src = `https://www.youtube.com/live_chat?v=${vidNumb}&embed_domain=${url}`;
     })
@@ -153,4 +154,21 @@ togglechat.addEventListener('click', toggleChat);
 function toggleChat() {
   chatter.classList.toggle('closetime');
   btndiv.classList.toggle('keepbuttons');
+}
+
+const toggleNav = document.querySelector('.video i');
+const cards = document.querySelector('.cards');
+toggleNav.addEventListener('click', toggleNaver);
+
+function toggleNaver() {
+    if (this.classList.value.includes('left')) {
+      cards.style.flex = '0 0 0';
+      this.classList.remove('fa-arrow-left')
+      this.classList.add('fa-arrow-right');
+      console.log(this.classList.value)
+    } else {
+      cards.style.flex = '0 0 250px';
+      this.classList.remove('fa-arrow-right')
+      this.classList.add('fa-arrow-left');
+    }
 }
