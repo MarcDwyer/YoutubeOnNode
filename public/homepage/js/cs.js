@@ -165,7 +165,6 @@ function toggleNaver() {
       cards.style.flex = '0 0 0';
       this.classList.remove('fa-arrow-left')
       this.classList.add('fa-arrow-right');
-      console.log(this.classList.value)
     } else {
       cards.style.flex = '0 0 250px';
       this.classList.remove('fa-arrow-right')
