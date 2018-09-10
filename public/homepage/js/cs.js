@@ -128,7 +128,6 @@ function addVideo(theName, vidNumb) {
   } else {
     const href = `https://www.youtube.com/watch?v=${vidNumb}`;
     const target = "_blank";
-    const itemdiv = document.querySelector(`.${theName}`);
    $(namediv).wrap(`<a class='linkme' href=${href} target=${target}></a>`);
   }
   }
