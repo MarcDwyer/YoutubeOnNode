@@ -9,7 +9,7 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 const poll =  require('./routes/poll.js');
 //var indexRouter = require('./routes/index');
-
+console.log('hellop')
 class getUser {
   constructor(name, channelId, vidid) {
     this.name = name;
