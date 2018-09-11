@@ -167,7 +167,7 @@ function toggleNaver() {
       this.classList.remove('fa-arrow-left')
       this.classList.add('fa-arrow-right');
     } else {
-      cards.style.flex = '0 0 250px';
+      cards.style.flex = '0 0 275px';
       this.classList.remove('fa-arrow-right')
       this.classList.add('fa-arrow-left');
     }
