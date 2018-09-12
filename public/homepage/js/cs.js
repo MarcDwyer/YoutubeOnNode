@@ -47,6 +47,7 @@ fetch (`../fetches/${this.name}stats.json`)
          const viddiv = document.querySelector(`.${this.name} `);
         viddiv.dataset.viewer = this.viewerCount;
          if (this.viewerCount == undefined) {
+           remover(this.name);
            this.viewerCount = 'Offline';
          } else {
          viddiv.querySelector('.number').textContent = `${this.viewerCount} viewers`;
@@ -89,8 +90,6 @@ burger.getData();
 cxnews.getData();
 }
 
-const pics = document.querySelectorAll('.pic');
-
 function updater(astring) {
 const item = document.querySelector(`.${astring} `);
 item.classList.add('live');
@@ -115,7 +114,7 @@ function remover(stringer) {
 }
 
 
-const links = document.querySelectorAll('.pic');
+
 const video = document.querySelector('.stream');
 const chat = document.querySelector('.chat');
 function addVideo(theName, vidNumb) {
