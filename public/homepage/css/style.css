@@ -240,6 +240,7 @@ a:hover {
   width: 5%;
 }
 .videobuttons span {
+  margin-top: 5px;
   order: 1;
   text-align: center;
   width: 95%;
