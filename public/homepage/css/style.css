@@ -188,18 +188,20 @@ background-color: #eee;
 }
 .keepbuttons {
   position: absolute;
-  display: grid;
   z-index: 1;
   max-width: 120px;
   top:0;
   right:0;
 }
 .buttorg {
-  display:grid;
+  display:block;
   width: 100%;
   margin-right: auto;
   margin-left: auto;
   transition: 0.3s ease;
+}
+.buttorg button {
+  width: 100%;
 }
 .copyright {
   font-size: 11px;
