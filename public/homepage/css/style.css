@@ -230,3 +230,17 @@ a:hover {
 [type="button"] {
   display:none;
 }
+
+.videobuttons {
+  display: flex;
+  width: 100%;
+}
+.videobuttons i {
+  order: 0;
+  width: 5%;
+}
+.videobuttons span {
+  order: 1;
+  text-align: center;
+  width: 95%;
+}

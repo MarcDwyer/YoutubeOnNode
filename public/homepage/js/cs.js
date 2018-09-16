@@ -26,8 +26,8 @@ class getStreamers {
         this.checker = true;
         this.vidid = this.json.items[0].id.videoId;
         updater(this.name);
-        addVideo(this.name, this.vidid);
         this.getStats();
+    //    addVideo(this.name, this.vidid, this.viewerCount);
       } else if (this.checker && this.json.pageInfo.totalResults == 0){
         this.checker = false;
         const viddiv = document.querySelector(`.${this.name} `);
@@ -44,6 +44,7 @@ fetch (`../fetches/${this.name}stats.json`)
        .then((res) => res.json())
        .then((data) => {
          this.viewerCount = data.items[0].liveStreamingDetails.concurrentViewers;
+         addVideo(this.name, this.vidid, this.viewerCount);
          const viddiv = document.querySelector(`.${this.name} `);
         viddiv.dataset.viewer = this.viewerCount;
          if (this.viewerCount == undefined) {
@@ -117,7 +118,7 @@ function remover(stringer) {
 
 const video = document.querySelector('.stream');
 const chat = document.querySelector('.chat');
-function addVideo(theName, vidNumb) {
+function addVideo(theName, vidNumb, viewerCount) {
   const namediv = document.querySelector(`.${theName} img`);
   const url = window.location.hostname;
   if (window.innerWidth > 850) {
@@ -125,6 +126,7 @@ function addVideo(theName, vidNumb) {
       document.body.style.backgroundColor = 'black';
       video.src = `https://www.youtube.com/embed/${vidNumb}`;
       chat.src = `https://www.youtube.com/live_chat?v=${vidNumb}&embed_domain=${url}`;
+      document.querySelector('.viewcount').textContent = `${viewerCount} viewers`;
     })
   } else {
     const href = `https://www.youtube.com/watch?v=${vidNumb}`;
