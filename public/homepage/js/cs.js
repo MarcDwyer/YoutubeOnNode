@@ -73,7 +73,7 @@ fetch (`../fetches/${this.name}stats.json`)
   if (window.innerWidth > 850) {
     namediv.addEventListener('click', () => {
       const updateCount = setInterval(() => {
-        documen.querySelector('.viewcount').textContent = `${this.viewerCount} Viewers`
+        document.querySelector('.viewcount').textContent = `${this.viewerCount} Viewers`
       }, 5000)
       document.body.style.backgroundColor = 'black';
       document.querySelector('.viewcount').textContent = `${this.viewerCount} Viewers`;
