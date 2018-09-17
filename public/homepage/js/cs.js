@@ -74,7 +74,7 @@ fetch (`../fetches/${this.name}stats.json`)
     namediv.addEventListener('click', () => {
       const updateCount = setInterval(() => {
         document.querySelector('.viewcount').textContent = `${this.viewerCount} Viewers`
-      }, 5000)
+      }, 30000)
       document.body.style.backgroundColor = 'black';
       document.querySelector('.viewcount').textContent = `${this.viewerCount} Viewers`;
       video.src = `https://www.youtube.com/embed/${this.vidid}`;
