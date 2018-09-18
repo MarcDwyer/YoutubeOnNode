@@ -101,7 +101,8 @@ html, body {
 .active {
   cursor: pointer;
   border: solid red 3px;
-  animation: pulse 2.5s linear infinite; }
+ /* animation: pulse 2.5s linear infinite; */
+}
 
 @keyframes pulse {
   0% {

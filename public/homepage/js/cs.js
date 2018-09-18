@@ -97,7 +97,7 @@ let burger = new getStreamers('burger', checker = false, 'UCJNILr75xb9zKpUI0RV7p
 let cxnews = new getStreamers('cxnews', checker = false, 'UCStEQ9BjMLjHTHLNA6cY9vg');
 
 init();
-setInterval(init, 30000);
+setInterval(init, 60000);
 
 function init() {
 mix.getData();
