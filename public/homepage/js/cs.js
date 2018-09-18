@@ -47,8 +47,9 @@ fetch (`../fetches/${this.name}stats.json`)
          const viddiv = document.querySelector(`.${this.name} `);
         viddiv.dataset.viewer = this.viewerCount;
          if (this.viewerCount == undefined) {
-           remover(this.name);
+           document.querySelector(`.${this.name}`).dataset.viewer = '1';
            organizeCards();
+           remover(this.name);
            this.viewerCount = 'Offline';
          } else {
          viddiv.querySelector('.number').textContent = `${this.viewerCount} viewers`;
@@ -96,7 +97,7 @@ let burger = new getStreamers('burger', checker = false, 'UCJNILr75xb9zKpUI0RV7p
 let cxnews = new getStreamers('cxnews', checker = false, 'UCStEQ9BjMLjHTHLNA6cY9vg');
 
 init();
-setInterval(init, 60000);
+setInterval(init, 30000);
 
 function init() {
 mix.getData();
