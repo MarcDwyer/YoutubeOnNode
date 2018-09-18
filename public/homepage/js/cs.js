@@ -72,11 +72,7 @@ fetch (`../fetches/${this.name}stats.json`)
   const url = window.location.hostname;
   if (window.innerWidth > 850) {
     namediv.addEventListener('click', () => {
-      const updateCount = setInterval(() => {
-        document.querySelector('.viewcount').textContent = `${this.viewerCount} Viewers`
-      }, 15000)
       document.body.style.backgroundColor = 'black';
-      document.querySelector('.viewcount').textContent = `${this.viewerCount} Viewers`;
       video.src = `https://www.youtube.com/embed/${this.vidid}`;
       chat.src = `https://www.youtube.com/live_chat?v=${this.vidid}&embed_domain=${url}`;
     })
