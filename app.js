@@ -45,7 +45,7 @@ let burger = new getUser('burger', 'UCJNILr75xb9zKpUI0RV7pmQ');
 let cxnews = new getUser('cxnews', 'UCStEQ9BjMLjHTHLNA6cY9vg');
 
 fetcher();
-setInterval(fetcher, 120000)
+setInterval(fetcher, 80000)
 function fetcher() {
   mix.getData();
   ice.getData();
