@@ -48,6 +48,7 @@ fetch (`../fetches/${this.name}stats.json`)
         viddiv.dataset.viewer = this.viewerCount;
          if (this.viewerCount == undefined) {
            remover(this.name);
+           organizeCards();
            this.viewerCount = 'Offline';
          } else {
          viddiv.querySelector('.number').textContent = `${this.viewerCount} viewers`;
