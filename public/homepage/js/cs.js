@@ -146,17 +146,6 @@ thediv.append(...newray);
 }
 
 
-const togglechat = document.querySelector('.buttorg .btn-danger');
-const btndiv = document.querySelector('.buttorg');
-const chatter = document.querySelector('.chatter');
-
-togglechat.addEventListener('click', toggleChat);
-
-function toggleChat() {
-  chatter.classList.toggle('closetime');
-  btndiv.classList.toggle('keepbuttons');
-}
-
 const toggleNav = document.querySelector('.video i');
 const cards = document.querySelector('.cards');
 toggleNav.addEventListener('click', toggleNaver);
