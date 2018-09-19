@@ -1,8 +1,6 @@
 /*
 Hello and welcome
 */
-const complete = false;
-const jsondata = [];
 
 class getStreamers {
   constructor(name, checker, channelId, vidid, json, viewerCount) {
@@ -15,18 +13,14 @@ class getStreamers {
     this.count = 0;
   }
   getData() {
-      if (this.count == 0) this.addLinks();
+    if (this.count == 0) this.addLinks();
       fetch(`fetches/${this.name}.json`)
       .then((res) => res.json())
       .then(data => {
-        const obj = {
-          name: this.name,
-          payload: data
-        }
-        jsondata.push(obj)
           this.json = data;
           this.dataThink();
     })
+
     }
   dataThink() {
       if (!this.checker && !this.json.pageInfo.totalResults == 0) {
@@ -46,7 +40,6 @@ class getStreamers {
       }
     }
   getStats() {
-    console.log('running...')
 fetch (`../fetches/${this.name}stats.json`)
        .then((res) => res.json())
        .then((data) => {
@@ -54,7 +47,7 @@ fetch (`../fetches/${this.name}stats.json`)
          this.addVideo(this.viewerCount);
          const viddiv = document.querySelector(`.${this.name} `);
         viddiv.dataset.viewer = this.viewerCount;
-         if (this.viewerCount === 'undefined') {
+         if (!this.viewerCount) {
            document.querySelector(`.${this.name}`).dataset.viewer = '1';
            organizeCards();
            remover(this.name);
@@ -96,6 +89,12 @@ fetch (`../fetches/${this.name}stats.json`)
   }
   }
 }
+chat();
+function chat() {
+  console.log('hel.')
+  const url = window.location.hostname;
+  document.querySelector('.chat').src = `https://www.youtube.com/live_chat?v=hHW1oY26kxQ&embed_domain=${url}`;
+}
 
 let ice = new getStreamers('ice', checker = false, 'UCv9Edl_WbtbPeURPtFDo-uA');
 let tsa = new getStreamers('tsa', checker = false, 'UCB0H_1M78_jwTyfaJuP241g');
@@ -105,10 +104,10 @@ let mix = new getStreamers('mix', checker = false, 'UC_jxnWLGJ2eQK4en3UblKEw');
 let marie = new getStreamers('marie', checker = false, 'UC16fss-5fnGp2Drqp1iT9pA');
 let burger = new getStreamers('burger', checker = false, 'UCJNILr75xb9zKpUI0RV7pmQ');
 let cxnews = new getStreamers('cxnews', checker = false, 'UCStEQ9BjMLjHTHLNA6cY9vg');
-
+let chilledcow = new getStreamers('chilledcow', checker = false, 'UCSJ4gkVC6NrvII8umztf0Ow');
 
 init();
-setInterval(init, 60000);
+setInterval(init, 80000);
 
 
 function init() {
@@ -120,6 +119,7 @@ destiny.getData();
 marie.getData();
 burger.getData();
 cxnews.getData();
+chilledcow.getData();
 }
 
 function updater(astring) {
@@ -173,3 +173,4 @@ function toggleNaver() {
       this.classList.add('fa-arrow-left');
     }
 }
+

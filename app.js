@@ -48,6 +48,7 @@ let mix = new getUser('mix', 'UC_jxnWLGJ2eQK4en3UblKEw');
 let marie = new getUser('marie', 'UC16fss-5fnGp2Drqp1iT9pA');
 let burger = new getUser('burger', 'UCJNILr75xb9zKpUI0RV7pmQ');
 let cxnews = new getUser('cxnews', 'UCStEQ9BjMLjHTHLNA6cY9vg');
+let chilledcow = new getUser('chilledcow', 'UCSJ4gkVC6NrvII8umztf0Ow');
 
 fetcher();
 setInterval(fetcher, 180000)
@@ -60,6 +61,7 @@ function fetcher() {
   marie.getData();
   burger.getData();
   cxnews.getData();
+  chilledcow.getData();
 }
 
 function getStats(vidnum, name) {
