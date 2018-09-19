@@ -16,7 +16,7 @@ class getUser {
     this.videoid = vidid;
   }
   getData() {
-    const API = 'AIzaSyAVqJhV6oUIRyzcUW0s1rMuZzV8Bfopw-g';
+    const API = 'AIzaSyBghJmzrFiYYr4ClicgFYHvN4ubVsnJxuE';
     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${this.channelId}&eventType=live&type=video&key=${API}`)
     .then((res) => res.json())
     .then(data => {
