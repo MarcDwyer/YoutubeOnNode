@@ -8,7 +8,10 @@ const cors = require('cors');
 const fs = require('fs');
 const fetch = require('node-fetch');
 const poll =  require('./routes/poll.js');
+const minify = require('babel-minify');
 //var indexRouter = require('./routes/index');
+
+const API = 'AIzaSyBghJmzrFiYYr4ClicgFYHvN4ubVsnJxuE';
 class getUser {
   constructor(name, channelId, vidid) {
     this.name = name;
@@ -16,7 +19,6 @@ class getUser {
     this.videoid = vidid;
   }
   getData() {
-    const API = 'AIzaSyBghJmzrFiYYr4ClicgFYHvN4ubVsnJxuE';
     fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${this.channelId}&eventType=live&type=video&key=${API}`)
     .then((res) => res.json())
     .then(data => {
@@ -61,7 +63,7 @@ function fetcher() {
 }
 
 function getStats(vidnum, name) {
-  fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics%2CliveStreamingDetails&id=${vidnum}&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I`)
+  fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics%2CliveStreamingDetails&id=${vidnum}&key=${API}`)
   .then((res) => res.json())
   .then((data) => {
     const newdata = JSON.stringify(data);

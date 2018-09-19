@@ -25,7 +25,8 @@ class getStreamers {
         }
         jsondata.push(obj)
           this.json = data;
-    }).then(this.dataThink)
+          this.dataThink();
+    })
     }
   dataThink() {
       if (!this.checker && !this.json.pageInfo.totalResults == 0) {
@@ -45,6 +46,7 @@ class getStreamers {
       }
     }
   getStats() {
+    console.log('running...')
 fetch (`../fetches/${this.name}stats.json`)
        .then((res) => res.json())
        .then((data) => {
@@ -52,7 +54,7 @@ fetch (`../fetches/${this.name}stats.json`)
          this.addVideo(this.viewerCount);
          const viddiv = document.querySelector(`.${this.name} `);
         viddiv.dataset.viewer = this.viewerCount;
-         if (!this.viewerCount) {
+         if (this.viewerCount === 'undefined') {
            document.querySelector(`.${this.name}`).dataset.viewer = '1';
            organizeCards();
            remover(this.name);
@@ -61,6 +63,9 @@ fetch (`../fetches/${this.name}stats.json`)
          viddiv.querySelector('.number').textContent = `${this.viewerCount} viewers`;
        }
      }).then(organizeCards)
+        .catch((err) => {
+          console.log('Whats going on');
+        })
   }
   addLinks() {
     const appenddiv = document.querySelector(`.${this.name}`);
