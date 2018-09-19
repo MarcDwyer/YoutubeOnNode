@@ -4,7 +4,7 @@
 }
 
 html, body {
-  background-color: var(--bgcolor);
+  background-color: black;
   height: 100%;
   margin: 0px;
   padding: 0px;
@@ -24,7 +24,6 @@ html, body {
   flex: 0 0 275px;
   display: flex;
   flex-direction: column;
-  height: 100%;
   overflow-Y: auto;
   overflow-X: hidden;
   border-left: 1px solid black;
@@ -252,4 +251,9 @@ a:hover {
   order: 1;
   text-align: center;
   width: 95%;
+}
+
+.theactualvideo {
+  margin: auto;
+  text-align: center;
 }
