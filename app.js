@@ -16,7 +16,8 @@ class getUser {
     this.videoid = vidid;
   }
   getData() {
-    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${this.channelId}&eventType=live&type=video&key=AIzaSyAxfrRQxi1QW-ilyKqXPXqqI-Woq0Ocm5I`)
+    const API = 'AIzaSyAVqJhV6oUIRyzcUW0s1rMuZzV8Bfopw-g';
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${this.channelId}&eventType=live&type=video&key=${API}`)
     .then((res) => res.json())
     .then(data => {
       const newdata = JSON.stringify(data);
@@ -30,7 +31,9 @@ class getUser {
     }).then(() => {
       if (this.videoid == undefined) return;
       getStats(this.videoid, this.name);
-    });
+    }).catch((err) => {
+      console.log('ERROR 404')
+    })
 
 }
 }
@@ -45,7 +48,7 @@ let burger = new getUser('burger', 'UCJNILr75xb9zKpUI0RV7pmQ');
 let cxnews = new getUser('cxnews', 'UCStEQ9BjMLjHTHLNA6cY9vg');
 
 fetcher();
-setInterval(fetcher, 80000)
+setInterval(fetcher, 120000)
 function fetcher() {
   mix.getData();
   ice.getData();

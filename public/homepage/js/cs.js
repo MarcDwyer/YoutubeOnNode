@@ -1,6 +1,8 @@
 /*
 Hello and welcome
 */
+const complete = false;
+const jsondata = [];
 
 class getStreamers {
   constructor(name, checker, channelId, vidid, json, viewerCount) {
@@ -13,13 +15,17 @@ class getStreamers {
     this.count = 0;
   }
   getData() {
+      if (this.count == 0) this.addLinks();
       fetch(`fetches/${this.name}.json`)
       .then((res) => res.json())
       .then(data => {
+        const obj = {
+          name: this.name,
+          payload: data
+        }
+        jsondata.push(obj)
           this.json = data;
-          if (this.count == 0) this.addLinks();
-          this.dataThink();
-  })
+    }).then(this.dataThink)
     }
   dataThink() {
       if (!this.checker && !this.json.pageInfo.totalResults == 0) {
@@ -46,7 +52,7 @@ fetch (`../fetches/${this.name}stats.json`)
          this.addVideo(this.viewerCount);
          const viddiv = document.querySelector(`.${this.name} `);
         viddiv.dataset.viewer = this.viewerCount;
-         if (this.viewerCount == undefined) {
+         if (!this.viewerCount) {
            document.querySelector(`.${this.name}`).dataset.viewer = '1';
            organizeCards();
            remover(this.name);
@@ -54,7 +60,7 @@ fetch (`../fetches/${this.name}stats.json`)
          } else {
          viddiv.querySelector('.number').textContent = `${this.viewerCount} viewers`;
        }
-     }).then(organizeCards);
+     }).then(organizeCards)
   }
   addLinks() {
     const appenddiv = document.querySelector(`.${this.name}`);
@@ -86,7 +92,6 @@ fetch (`../fetches/${this.name}stats.json`)
   }
 }
 
-
 let ice = new getStreamers('ice', checker = false, 'UCv9Edl_WbtbPeURPtFDo-uA');
 let tsa = new getStreamers('tsa', checker = false, 'UCB0H_1M78_jwTyfaJuP241g');
 let destiny = new getStreamers('destiny', checker = false, 'UC554eY5jNUfDq3yDOJYirOQ');
@@ -96,8 +101,10 @@ let marie = new getStreamers('marie', checker = false, 'UC16fss-5fnGp2Drqp1iT9pA
 let burger = new getStreamers('burger', checker = false, 'UCJNILr75xb9zKpUI0RV7pmQ');
 let cxnews = new getStreamers('cxnews', checker = false, 'UCStEQ9BjMLjHTHLNA6cY9vg');
 
+
 init();
 setInterval(init, 60000);
+
 
 function init() {
 mix.getData();
