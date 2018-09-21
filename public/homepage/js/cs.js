@@ -89,12 +89,12 @@ fetch (`../fetches/${this.name}stats.json`)
   }
   }
 }
-chat();
-function chat() {
-  console.log('hel.')
+
+(function() {
   const url = window.location.hostname;
   document.querySelector('.chat').src = `https://www.youtube.com/live_chat?v=hHW1oY26kxQ&embed_domain=${url}`;
-}
+
+})();
 
 let ice = new getStreamers('ice', checker = false, 'UCv9Edl_WbtbPeURPtFDo-uA');
 let tsa = new getStreamers('tsa', checker = false, 'UCB0H_1M78_jwTyfaJuP241g');
