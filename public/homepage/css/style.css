@@ -121,13 +121,14 @@ html, body {
 
 .video {
   order:1;
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  border-radius: 3px;
   width: 100%;
  }
  .stream {
+   height: 90%;
    margin: auto;
-  height: 90%;
  }
 
   .number {
@@ -238,22 +239,16 @@ a:hover {
   display:none;
 }
 
-.videobuttons {
-  display: flex;
-  width: 100%;
-}
-.videobuttons i {
-  order: 0;
-  width: 5%;
-}
-.videobuttons span {
-  margin-top: 5px;
-  order: 1;
-  text-align: center;
-  width: 95%;
+.video i {
+  position: absolute;
+  top: 0;
 }
 
-.theactualvideo {
-  margin: auto;
-  text-align: center;
+.toggled {
+  flex: 0 0 0;
+}
+.chatterbtn {
+  position: absolute;
+  top: 0;
+  right: 0;
 }

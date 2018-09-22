@@ -176,3 +176,26 @@ function toggleNaver() {
     }
 }
 
+document.querySelector('.toggler').addEventListener('click', toggleChat);
+
+let source;
+
+function toggleChat() {
+  const chatter = document.querySelector('.chatter');
+  const button = chatter.querySelector('button');
+  if (!source) {
+    source = chatter.querySelector('.chat').src;
+    chatter.querySelector('.chat').src = '';
+    setTimeout(() => {
+      chatter.classList.toggle('toggled');
+      button.classList.toggle('chatterbtn');
+    }, 150)
+  } else {
+    chatter.classList.toggle('toggled');
+    button.classList.toggle('chatterbtn');
+    setTimeout(() => {
+      chatter.querySelector('.chat').src = source;
+      source = undefined;
+    }, 600)
+  }
+}
