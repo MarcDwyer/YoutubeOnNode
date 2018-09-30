@@ -76,14 +76,14 @@ fetch (`../fetches/${this.name}stats.json`)
   const chatter = document.querySelector('.chatter');
   const chat = document.querySelector('.chat');
   const namediv = document.querySelector(`.${this.name} img`);
+  const button = chatter.querySelector('button');
   const url = window.location.hostname;
   if (window.innerWidth > 850) {
     namediv.addEventListener('click', () => {
       document.body.style.backgroundColor = 'black';
       video.src = `https://www.youtube.com/embed/${this.vidid}`;
       chat.src = `https://www.youtube.com/live_chat?v=${this.vidid}&embed_domain=${url}`;
-      chatter.style.flex = '0 0 20%';
-      document.querySelector('.')
+      if (chatter.classList.value.includes('toggled')) chatter.classList.remove('toggled');  button.classList.remove('chatterbtn');
       
     })
   } else {
