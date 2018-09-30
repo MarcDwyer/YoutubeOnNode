@@ -73,6 +73,7 @@ fetch (`../fetches/${this.name}stats.json`)
 
  addVideo() {
   const video = document.querySelector('.stream');
+  const chatter = document.querySelector('.chatter');
   const chat = document.querySelector('.chat');
   const namediv = document.querySelector(`.${this.name} img`);
   const url = window.location.hostname;
@@ -81,6 +82,9 @@ fetch (`../fetches/${this.name}stats.json`)
       document.body.style.backgroundColor = 'black';
       video.src = `https://www.youtube.com/embed/${this.vidid}`;
       chat.src = `https://www.youtube.com/live_chat?v=${this.vidid}&embed_domain=${url}`;
+      chatter.style.flex = '0 0 20%';
+      document.querySelector('.')
+      
     })
   } else {
     const href = `https://www.youtube.com/watch?v=${this.vidid}`;
@@ -102,7 +106,7 @@ let destiny = new getStreamers('destiny', checker = false, 'UC554eY5jNUfDq3yDOJY
 let hyphonix = new getStreamers('hyphonix', checker = false, 'UC4abN4ZiybnsAXTkTBX7');
 let mix = new getStreamers('mix', checker = false, 'UC_jxnWLGJ2eQK4en3UblKEw');
 let marie = new getStreamers('marie', checker = false, 'UC16fss-5fnGp2Drqp1iT9pA');
-let burger = new getStreamers('burger', checker = false, 'UCJNILr75xb9zKpUI0RV7pmQ');
+let burger = new getStreamers('burger', checker = false, 'UC3MAdjjG3LMCG8CV-d7nEQA');
 let cxnews = new getStreamers('cxnews', checker = false, 'UCStEQ9BjMLjHTHLNA6cY9vg');
 let chilledcow = new getStreamers('chilledcow', checker = false, 'UCSJ4gkVC6NrvII8umztf0Ow');
 let lol = new getStreamers('lol', checker = false, 'UCvqRdlKsE5Q8mf8YXbdIJLw');

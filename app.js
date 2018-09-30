@@ -39,14 +39,14 @@ class getUser {
 
 }
 }
-
+// let burger = new getUser('burger', 'UCJNILr75xb9zKpUI0RV7pmQ'); old burger
 let ice = new getUser('ice', 'UCv9Edl_WbtbPeURPtFDo-uA');
 let hyphonix = new getUser('hyphonix', 'UC4abN4ZiybnsAXTkTBX7now');
 let tsa = new getUser('tsa', 'UCB0H_1M78_jwTyfaJuP241g');
 let destiny = new getUser('destiny', 'UC554eY5jNUfDq3yDOJYirOQ');
 let mix = new getUser('mix', 'UC_jxnWLGJ2eQK4en3UblKEw');
 let marie = new getUser('marie', 'UC16fss-5fnGp2Drqp1iT9pA');
-let burger = new getUser('burger', 'UCJNILr75xb9zKpUI0RV7pmQ');
+let burger = new getUser('burger', 'UC3MAdjjG3LMCG8CV-d7nEQA');
 let cxnews = new getUser('cxnews', 'UCStEQ9BjMLjHTHLNA6cY9vg');
 let chilledcow = new getUser('chilledcow', 'UCSJ4gkVC6NrvII8umztf0Ow');
 let lol = new getUser('lol', 'UCvqRdlKsE5Q8mf8YXbdIJLw');
