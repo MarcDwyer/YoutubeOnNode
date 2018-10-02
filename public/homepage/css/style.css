@@ -224,6 +224,11 @@ a:hover {
 .linkme {
   width: 100%;
 }
+.video i {
+  position: absolute;
+  top: 0;
+
+}
 @media only screen and (max-width: 850px) {
   .cards {
     flex: 0 0 100%;
@@ -236,13 +241,13 @@ a:hover {
   .stream {
     display: none;
   }
+  .video i {
+    display: none;
+    }
+    
 }
 [type="button"] {
   display:none;
-}
-
-.video i {
-display: none;
 }
 
 .toggled {
