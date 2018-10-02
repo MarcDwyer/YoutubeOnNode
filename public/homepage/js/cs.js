@@ -1,6 +1,7 @@
 /*
 Hello and welcome
 */
+let source;
 
 class getStreamers {
   constructor(name, checker, channelId, vidid, json, viewerCount) {
@@ -83,6 +84,7 @@ fetch (`../fetches/${this.name}stats.json`)
       document.body.style.backgroundColor = 'black';
       video.src = `https://www.youtube.com/embed/${this.vidid}`;
       chat.src = `https://www.youtube.com/live_chat?v=${this.vidid}&embed_domain=${url}`;
+      source = `https://www.youtube.com/live_chat?v=${this.vidid}&embed_domain=${url}`;
       if (chatter.classList.value.includes('toggled')) chatter.classList.remove('toggled');  button.classList.remove('chatterbtn');
       
     })
@@ -184,8 +186,6 @@ function toggleNaver() {
 
 document.querySelector('.toggler').addEventListener('click', toggleChat);
 
-let source;
-
 function toggleChat() {
   const chatter = document.querySelector('.chatter');
   const button = chatter.querySelector('button');
@@ -195,13 +195,13 @@ function toggleChat() {
     setTimeout(() => {
       chatter.classList.toggle('toggled');
       button.classList.toggle('chatterbtn');
-    }, 150)
+    }, 650)
   } else {
     chatter.classList.toggle('toggled');
     button.classList.toggle('chatterbtn');
     setTimeout(() => {
-      chatter.querySelector('.chat').src = source;
-      source = undefined;
+     // chatter.querySelector('.chat').src = source;
+      
     }, 600)
   }
 }
