@@ -228,6 +228,7 @@ a:hover {
   .cards {
     flex: 0 0 100%;
     overflow-y: scroll;
+    height: 100vh;
   }
   .chatter {
     display: none;
