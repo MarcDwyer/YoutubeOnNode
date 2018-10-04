@@ -1,7 +1,6 @@
 /*
 Hello and welcome
 */
-let source;
 
 class getStreamers {
   constructor(name, checker, channelId, vidid, json, viewerCount) {
@@ -14,7 +13,6 @@ class getStreamers {
     this.count = 0;
   }
   getData() {
-    if (this.count == 0) this.addLinks();
       fetch(`fetches/${this.name}.json`)
       .then((res) => res.json())
       .then(data => {
@@ -58,7 +56,6 @@ fetch (`../fetches/${this.name}stats.json`)
        }
      }).then(organizeCards)
         .catch((err) => {
-          console.log('Whats going on');
         })
   }
   addLinks() {
@@ -84,7 +81,6 @@ fetch (`../fetches/${this.name}stats.json`)
       document.body.style.backgroundColor = 'black';
       video.src = `https://www.youtube.com/embed/${this.vidid}`;
       chat.src = `https://www.youtube.com/live_chat?v=${this.vidid}&embed_domain=${url}`;
-      source = `https://www.youtube.com/live_chat?v=${this.vidid}&embed_domain=${url}`;
       if (chatter.classList.value.includes('toggled')) chatter.classList.remove('toggled');  button.classList.remove('chatterbtn');
       
     })
@@ -133,10 +129,11 @@ pepper.getData();
 }
 
 function updater(astring) {
-const item = document.querySelector(`.${astring} `);
+const item = document.querySelector(`.${astring}`);
+const img = item.querySelector('img');
 item.classList.add('live');
-item.children[1].classList.add('active');
-item.querySelector('.fa').style.color = 'red';
+img.classList.add('active');
+// item.querySelector('.fa').style.color = 'red';
 
 }
 
@@ -189,19 +186,35 @@ document.querySelector('.toggler').addEventListener('click', toggleChat);
 function toggleChat() {
   const chatter = document.querySelector('.chatter');
   const button = chatter.querySelector('button');
-  if (!source) {
-    source = chatter.querySelector('.chat').src;
-    chatter.querySelector('.chat').src = '';
-    setTimeout(() => {
-      chatter.classList.toggle('toggled');
-      button.classList.toggle('chatterbtn');
-    }, 650)
-  } else {
+
     chatter.classList.toggle('toggled');
     button.classList.toggle('chatterbtn');
-    setTimeout(() => {
-     // chatter.querySelector('.chat').src = source;
-      
-    }, 600)
   }
-}
+
+  document.querySelector('.fa-toggle-on').addEventListener('click', toggleColor);
+  document.addEventListener("DOMContentLoaded", toggleColor);
+
+let isWhite = JSON.parse(localStorage.getItem('isWhite')) || false;
+
+  function toggleColor(e) {
+    if (e && e.type === 'click') {
+      isWhite = !isWhite;
+      localStorage.setItem('isWhite', isWhite)
+      }
+    const darkcards = '#212121';
+    const darkfont = 'white';
+    const darkborder = 'black';
+    const whitecards = '#D6D6D6';
+    const whitefont = 'black';
+    const whiteborder = '#ABABAB';
+
+    if (isWhite) {
+      document.documentElement.style.setProperty('--whitecards', darkcards)
+      document.documentElement.style.setProperty('--whitefont', darkfont)
+      document.documentElement.style.setProperty('--whiteborder', darkborder)
+    } if (!isWhite) {
+      document.documentElement.style.setProperty('--whitecards', whitecards)
+      document.documentElement.style.setProperty('--whitefont', whitefont)
+      document.documentElement.style.setProperty('--whiteborder', whiteborder)
+    }
+  }
