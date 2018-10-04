@@ -54,7 +54,7 @@ let pepper = new getUser('pepper', 'UCdSr4xliU8yDyS1aGnCUMTA');
 let evan = new getUser('evan', 'UCHYUiFsAJ-EDerAccSHIslw');
 
 fetcher();
-setInterval(fetcher, 180000)
+setInterval(fetcher, 500000)
 function fetcher() {
   mix.getData();
   ice.getData();

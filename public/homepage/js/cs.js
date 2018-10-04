@@ -12,14 +12,13 @@ class getStreamers {
     this.channelId = channelId;
     this.count = 0;
   }
-  getData() {
+  getData(callback) {
       fetch(`fetches/${this.name}.json`)
       .then((res) => res.json())
       .then(data => {
           this.json = data;
           this.dataThink();
-    })
-
+      })
     }
   dataThink() {
       if (!this.checker && !this.json.pageInfo.totalResults == 0) {
@@ -33,12 +32,12 @@ class getStreamers {
         this.viewerCount = 0;
         viddiv.dataset.viewer = this.viewerCount;
         remover(this.name);
-        organizeCards();
+    //    organizeCards();
       }  else if (this.checker && !this.json.pageInfo.totalResults == 0) {
         this.getStats();
       }
     }
-  getStats() {
+  getStats(cb) {
 fetch (`../fetches/${this.name}stats.json`)
        .then((res) => res.json())
        .then((data) => {
@@ -48,7 +47,7 @@ fetch (`../fetches/${this.name}stats.json`)
         viddiv.dataset.viewer = this.viewerCount;
          if (!this.viewerCount) {
            document.querySelector(`.${this.name}`).dataset.viewer = '1';
-           organizeCards();
+        //   organizeCards();
            remover(this.name);
            this.viewerCount = 'Offline';
          } else {
@@ -135,8 +134,6 @@ const item = document.querySelector(`.${astring}`);
 const img = item.querySelector('img');
 item.classList.add('live');
 img.classList.add('active');
-// item.querySelector('.fa').style.color = 'red';
-
 }
 
 function remover(stringer) {
@@ -147,10 +144,10 @@ function remover(stringer) {
     item.classList.remove('live');
     item.querySelector('.fa').style.color = '#eee';
     item.querySelector('.number').textContent = 'Offline';
-  }
-  item.classList.remove('live');
-  item.children[1].classList.remove('active');
-  item.querySelector('.fa').style.color = '#eee';
+    }
+    item.classList.remove('live');
+    const active = item.querySelector('.active');
+    active.classList.remove('active');
   item.querySelector('.number').textContent = 'Offline';
 }
 
