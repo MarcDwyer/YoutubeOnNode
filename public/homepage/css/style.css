@@ -152,7 +152,6 @@ html, body {
     background-color: var(--cards);
     order: 2;
     flex: 0 0 20%;
-    transition: 0.3s ease;
     border-radius: 5px;
   }
   .chat {
@@ -233,6 +232,7 @@ a:hover {
   position: absolute;
   top: 0;
   color:white;
+  cursor: pointer;
 
 }
 .toggled {
@@ -287,4 +287,5 @@ position: absolute;
 top:0;
 left: 0;
 font-size: 30px;
+cursor: pointer;
 }
