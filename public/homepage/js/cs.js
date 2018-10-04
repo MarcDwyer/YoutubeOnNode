@@ -206,17 +206,22 @@ let isWhite = JSON.parse(localStorage.getItem('isWhite')) || false;
     const darkcards = '#212121';
     const darkfont = 'white';
     const darkborder = 'black';
+    const darkscroll = '#373737';
     const whitecards = '#D6D6D6';
     const whitefont = 'black';
     const whiteborder = '#ABABAB';
+    const whitescroll = '#C0C0C0';
 
     if (isWhite) {
       document.documentElement.style.setProperty('--whitecards', darkcards)
       document.documentElement.style.setProperty('--whitefont', darkfont)
       document.documentElement.style.setProperty('--whiteborder', darkborder)
+      document.documentElement.style.setProperty('--whitescroll', darkscroll)
+
     } if (!isWhite) {
       document.documentElement.style.setProperty('--whitecards', whitecards)
       document.documentElement.style.setProperty('--whitefont', whitefont)
       document.documentElement.style.setProperty('--whiteborder', whiteborder)
+      document.documentElement.style.setProperty('--whitescroll', whitescroll)
     }
   }

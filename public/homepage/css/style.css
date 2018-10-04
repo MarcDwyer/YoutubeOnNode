@@ -7,6 +7,7 @@
   --whitecards: #D6D6D6;
   --whitefont: black;
   --whiteborder: #ABABAB;
+  --whitescroll: #C0C0C0;
 }
 
 html, body {
@@ -172,10 +173,10 @@ html, body {
 }
   ::-webkit-scrollbar {
     width: 10px;
-    background-color: black;
+    background-color: var(--whitecards);
 }
 ::-webkit-scrollbar-thumb {
-  background: #2D2D2D;
+  background: var(--whitescroll);
 }
 
 .poll {
