@@ -12,7 +12,7 @@ class getStreamers {
     this.channelId = channelId;
     this.count = 0;
   }
-  getData(callback) {
+  getData() {
       fetch(`fetches/${this.name}.json`)
       .then((res) => res.json())
       .then(data => {
@@ -32,22 +32,22 @@ class getStreamers {
         this.viewerCount = 0;
         viddiv.dataset.viewer = this.viewerCount;
         remover(this.name);
-    //    organizeCards();
+        organizeCards();
       }  else if (this.checker && !this.json.pageInfo.totalResults == 0) {
         this.getStats();
       }
     }
-  getStats(cb) {
+  getStats() {
 fetch (`../fetches/${this.name}stats.json`)
        .then((res) => res.json())
        .then((data) => {
-         this.viewerCount = data.items[0].liveStreamingDetails.concurrentViewers;
+         this.viewerCount = data.items[0].statistics.viewerCount || data.items[0].liveStreamingDetails.concurrentViewers;
          this.addVideo(this.viewerCount);
          const viddiv = document.querySelector(`.${this.name} `);
         viddiv.dataset.viewer = this.viewerCount;
          if (!this.viewerCount) {
            document.querySelector(`.${this.name}`).dataset.viewer = '1';
-        //   organizeCards();
+           organizeCards();
            remover(this.name);
            this.viewerCount = 'Offline';
          } else {
@@ -112,7 +112,6 @@ let evan = new getStreamers('evan', checker = false, 'UCHYUiFsAJ-EDerAccSHIslw')
 
 init();
 setInterval(init, 80000);
-
 
 function init() {
 mix.getData();
