@@ -254,23 +254,11 @@ a:hover {
 @media only screen and (max-width: 850px) {
   .cards {
     flex: 0 0 100%;
-    overflow-y: scroll;
   }
-  .carder {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .namer {
-    margin-left: 25px;
-  }
+
   .pic {
     width: 85px;
     height: 85px;
-  }
-  .center-info {
-    display: flex;
-    flex-direction: column;
   }
   .chatter {
     display: none;
