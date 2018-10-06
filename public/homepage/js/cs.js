@@ -21,6 +21,9 @@ class getStreamers {
       })
     }
   dataThink() {
+      if (this.json.pageInfo.totalResults > 1) {
+        this.json.items.splice(0, 1);
+      }
       if (!this.checker && !this.json.pageInfo.totalResults == 0) {
         this.checker = true;
         this.vidid = this.json.items[0].id.videoId;
@@ -41,7 +44,8 @@ class getStreamers {
 fetch (`../fetches/${this.name}stats.json`)
        .then((res) => res.json())
        .then((data) => {
-         this.viewerCount = data.items[0].statistics.viewerCount || data.items[0].liveStreamingDetails.concurrentViewers;
+         if (this.name == 'ice') console.log(data)
+         this.viewerCount = data.items[0].liveStreamingDetails.concurrentViewers;
          this.addVideo(this.viewerCount);
          const viddiv = document.querySelector(`.${this.name} `);
         viddiv.dataset.viewer = this.viewerCount;
@@ -75,6 +79,7 @@ fetch (`../fetches/${this.name}stats.json`)
   const namediv = document.querySelector(`.${this.name} img`);
   const button = chatter.querySelector('button');
   const url = window.location.hostname;
+  if (this.name == 'ice') console.log(this.viewerCount)
   if (window.innerWidth > 850) {
     namediv.addEventListener('click', () => {
       document.body.style.backgroundColor = 'black';

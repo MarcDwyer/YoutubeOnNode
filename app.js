@@ -23,6 +23,9 @@ class getUser {
     .then((res) => res.json())
     .then(data => {
       const newdata = JSON.stringify(data);
+      if (data.pageInfo.totalResults > 1) {
+        data.items.splice(0, 1);
+      }
       fs.writeFile(`public/homepage/fetches/${this.name}.json`, newdata, finished)
       if (!data.pageInfo.totalResults == 0) {
       this.videoid = data.items[0].id.videoId;
