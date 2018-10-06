@@ -52,6 +52,7 @@ let chilledcow = new getUser('chilledcow', 'UCSJ4gkVC6NrvII8umztf0Ow');
 let lol = new getUser('lol', 'UCvqRdlKsE5Q8mf8YXbdIJLw');
 let pepper = new getUser('pepper', 'UCdSr4xliU8yDyS1aGnCUMTA');
 let evan = new getUser('evan', 'UCHYUiFsAJ-EDerAccSHIslw');
+let gary = new getUser('gary', 'UCvxSwu13u1wWyROPlCH-MZg');
 
 fetcher();
 setInterval(fetcher, 180000)
@@ -68,6 +69,7 @@ function fetcher() {
   lol.getData();
   pepper.getData();
   evan.getData();
+  gary.getData();
 }
 
 function getStats(vidnum, name) {

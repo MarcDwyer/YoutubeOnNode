@@ -109,6 +109,7 @@ let chilledcow = new getStreamers('chilledcow', checker = false, 'UCSJ4gkVC6NrvI
 let lol = new getStreamers('lol', checker = false, 'UCvqRdlKsE5Q8mf8YXbdIJLw');
 let pepper = new getStreamers('pepper', checker = false, 'UCdSr4xliU8yDyS1aGnCUMTA');
 let evan = new getStreamers('evan', checker = false, 'UCHYUiFsAJ-EDerAccSHIslw');
+let gary = new getStreamers('gary', checker = false, 'UCvxSwu13u1wWyROPlCH-MZg');
 
 init();
 setInterval(init, 80000);
@@ -126,6 +127,7 @@ chilledcow.getData();
 lol.getData();
 pepper.getData();
 evan.getData();
+gary.getData();
 }
 
 function updater(astring) {
