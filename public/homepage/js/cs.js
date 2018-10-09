@@ -37,7 +37,7 @@ class getStreamers {
         this.viewerCount = 0;
         viddiv.dataset.viewer = this.viewerCount;
         remover(this.name);
-        organizeCards();
+     //   organizeCards();
       }  else if (this.checker && !this.json.pageInfo.totalResults == 0) {
         await this.getStats();
       }
@@ -51,13 +51,13 @@ class getStreamers {
         viddiv.dataset.viewer = this.viewerCount;
         if (!this.viewerCount) {
           document.querySelector(`.${this.name}`).dataset.viewer = '1';
-          organizeCards();
+      //    organizeCards();
           remover(this.name);
           this.viewerCount = 'Offline';
         } else {
         viddiv.querySelector('.number').textContent = `${this.viewerCount} viewers`;
       }
-      organizeCards();
+   //   organizeCards();
   }
   addLinks() {
     const appenddiv = document.querySelector(`.${this.name}`);
@@ -129,6 +129,7 @@ await pepper.getData();
 await evan.getData();
 await gary.getData();
 (() => {
+  organizeCards();
   if (!allDone) {
   const video = document.querySelector('.stream');
   const chat = document.querySelector('.chat');
