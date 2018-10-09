@@ -46,18 +46,16 @@ class getStreamers {
         const secondFetch = await fetch(`../fetches/${this.name}stats.json`);
         const fetchResult = await secondFetch.json();
         this.viewerCount = fetchResult.items[0].liveStreamingDetails.concurrentViewers;
-        this.addVideo(this.viewerCount);
+        this.addVideo();
         const viddiv = document.querySelector(`.${this.name} `);
         viddiv.dataset.viewer = this.viewerCount;
         if (!this.viewerCount) {
           document.querySelector(`.${this.name}`).dataset.viewer = '1';
-      //    organizeCards();
           remover(this.name);
           this.viewerCount = 'Offline';
         } else {
         viddiv.querySelector('.number').textContent = `${this.viewerCount} viewers`;
       }
-   //   organizeCards();
   }
   addLinks() {
     const appenddiv = document.querySelector(`.${this.name}`);
@@ -67,7 +65,6 @@ class getStreamers {
     alink.target = "_blank";
     alink.innerHTML = '<i class="fa fa-youtube-play"></i>';
     appenddiv.append(alink);
-    this.count++;
   }
 
  addVideo() {
@@ -130,7 +127,7 @@ await evan.getData();
 await gary.getData();
 (() => {
   organizeCards();
-  if (!allDone) {
+  if (!allDone && !liveStreamers.length == 0) {
   const video = document.querySelector('.stream');
   const chat = document.querySelector('.chat');
   const url = window.location.hostname;
