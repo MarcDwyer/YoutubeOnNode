@@ -1,6 +1,7 @@
 /*
 Hello and welcome
 */
+let liveStreamers = []
 
 class getStreamers {
   constructor(name, checker, channelId, vidid, json, viewerCount) {
@@ -10,17 +11,18 @@ class getStreamers {
     this.json = json;
     this.viewerCount = viewerCount;
     this.channelId = channelId;
-    this.count = 0;
+    this.counter = 0;
   }
-  getData() {
-      fetch(`fetches/${this.name}.json`)
-      .then((res) => res.json())
-      .then(data => {
-          this.json = data;
-          this.dataThink();
-      })
+  async getData(callback) {
+     const fetcher = await fetch(`fetches/${this.name}.json`)
+     const fetched = await fetcher.json();
+     this.json = fetched;
+     await this.dataThink();
+     if (this.checker && !this.viewerCount.includes('Offline')) {
+       liveStreamers.push(this);
+     }
     }
-  dataThink() {
+ async dataThink() {
       if (this.json.pageInfo.totalResults > 1) {
         this.json.items.splice(0, 1);
       }
@@ -28,7 +30,7 @@ class getStreamers {
         this.checker = true;
         this.vidid = this.json.items[0].id.videoId;
         updater(this.name);
-        this.getStats();
+      await this.getStats();
       } else if (this.checker && this.json.pageInfo.totalResults == 0){
         this.checker = false;
         const viddiv = document.querySelector(`.${this.name} `);
@@ -37,29 +39,25 @@ class getStreamers {
         remover(this.name);
         organizeCards();
       }  else if (this.checker && !this.json.pageInfo.totalResults == 0) {
-        this.getStats();
+        await this.getStats();
       }
     }
-  getStats() {
-fetch (`../fetches/${this.name}stats.json`)
-       .then((res) => res.json())
-       .then((data) => {
-         if (this.name == 'ice') console.log(data)
-         this.viewerCount = data.items[0].liveStreamingDetails.concurrentViewers;
-         this.addVideo(this.viewerCount);
-         const viddiv = document.querySelector(`.${this.name} `);
+  async getStats() {
+        const secondFetch = await fetch(`../fetches/${this.name}stats.json`);
+        const fetchResult = await secondFetch.json();
+        this.viewerCount = fetchResult.items[0].liveStreamingDetails.concurrentViewers;
+        this.addVideo(this.viewerCount);
+        const viddiv = document.querySelector(`.${this.name} `);
         viddiv.dataset.viewer = this.viewerCount;
-         if (!this.viewerCount) {
-           document.querySelector(`.${this.name}`).dataset.viewer = '1';
-           organizeCards();
-           remover(this.name);
-           this.viewerCount = 'Offline';
-         } else {
-         viddiv.querySelector('.number').textContent = `${this.viewerCount} viewers`;
-       }
-     }).then(organizeCards)
-        .catch((err) => {
-        })
+        if (!this.viewerCount) {
+          document.querySelector(`.${this.name}`).dataset.viewer = '1';
+          organizeCards();
+          remover(this.name);
+          this.viewerCount = 'Offline';
+        } else {
+        viddiv.querySelector('.number').textContent = `${this.viewerCount} viewers`;
+      }
+      organizeCards();
   }
   addLinks() {
     const appenddiv = document.querySelector(`.${this.name}`);
@@ -79,7 +77,7 @@ fetch (`../fetches/${this.name}stats.json`)
   const namediv = document.querySelector(`.${this.name} img`);
   const button = chatter.querySelector('button');
   const url = window.location.hostname;
-  if (this.name == 'ice') console.log(this.viewerCount)
+  
   if (window.innerWidth > 850) {
     namediv.addEventListener('click', () => {
       document.body.style.backgroundColor = 'black';
@@ -96,11 +94,6 @@ fetch (`../fetches/${this.name}stats.json`)
   }
 }
 
-(function() {
-  const url = window.location.hostname;
-  document.querySelector('.chat').src = `https://www.youtube.com/live_chat?v=hHW1oY26kxQ&embed_domain=${url}`;
-
-})();
 
 let ice = new getStreamers('ice', checker = false, 'UCv9Edl_WbtbPeURPtFDo-uA');
 let tsa = new getStreamers('tsa', checker = false, 'UCB0H_1M78_jwTyfaJuP241g');
@@ -119,20 +112,37 @@ let gary = new getStreamers('gary', checker = false, 'UCvxSwu13u1wWyROPlCH-MZg')
 init();
 setInterval(init, 80000);
 
-function init() {
-mix.getData();
-ice.getData();
-tsa.getData();
-hyphonix.getData();
-destiny.getData();
-marie.getData();
-burger.getData();
-cxnews.getData();
-chilledcow.getData();
-lol.getData();
-pepper.getData();
-evan.getData();
-gary.getData();
+let allDone = false;
+
+async function init() {
+await mix.getData();
+await ice.getData();
+await tsa.getData();
+await hyphonix.getData();
+await destiny.getData();
+await marie.getData();
+await burger.getData();
+await cxnews.getData();
+await chilledcow.getData();
+await lol.getData();
+await pepper.getData();
+await evan.getData();
+await gary.getData();
+(() => {
+  if (!allDone) {
+  const video = document.querySelector('.stream');
+  const chat = document.querySelector('.chat');
+  const url = window.location.hostname;
+  const activeStreams = liveStreamers.sort((a, b) => {
+    return +a.viewerCount < +b.viewerCount ? 1:-1;
+  })
+  video.src = `https://www.youtube.com/embed/${activeStreams[0].vidid}`;
+  chat.src = `https://www.youtube.com/live_chat?v=${activeStreams[0].vidid}&embed_domain=${url}`;
+  liveStreamers = [];
+  allDone = true;
+}
+})();
+
 }
 
 function updater(astring) {
@@ -152,8 +162,8 @@ function remover(stringer) {
     item.querySelector('.number').textContent = 'Offline';
     }
     item.classList.remove('live');
-    const active = item.querySelector('.active');
-    active.classList.remove('active');
+    const active = item.querySelector('.active') ? item.querySelector('.active') : null;
+    if (active) active.classList.remove('active');
   item.querySelector('.number').textContent = 'Offline';
 }
 

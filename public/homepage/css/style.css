@@ -125,6 +125,7 @@ html, body {
   }
 
 .video {
+  position: relative;
   order:1;
   display: flex;
   flex-direction: column;
@@ -232,6 +233,7 @@ a:hover {
 .video i {
   position: absolute;
   top: 0;
+  left:15px;
   color:white;
   cursor: pointer;
 
