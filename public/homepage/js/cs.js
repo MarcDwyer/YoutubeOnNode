@@ -197,14 +197,13 @@ function toggleNaver() {
     }
 }
 
-document.querySelector('.toggler').addEventListener('click', toggleChat);
+const boot = document.querySelector('.toggler');
+boot.addEventListener('click', toggleChat);
 
 function toggleChat() {
   const chatter = document.querySelector('.chatter');
-  const button = chatter.querySelector('button');
-
-    chatter.classList.toggle('toggled');
-    button.classList.toggle('chatterbtn');
+   chatter.classList.toggle('toggled');
+   boot.classList.toggle('chatterbtn');
   }
 
   document.querySelector('.fa-toggle-on').addEventListener('click', toggleColor);
