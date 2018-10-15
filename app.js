@@ -8,8 +8,7 @@ const cors = require('cors');
 const fs = require('fs');
 const fetch = require('node-fetch');
 const poll =  require('./routes/poll.js');
-const minify = require('babel-minify');
-//var indexRouter = require('./routes/index');
+
 
 const API = 'AIzaSyBghJmzrFiYYr4ClicgFYHvN4ubVsnJxuE';
 class getUser {
