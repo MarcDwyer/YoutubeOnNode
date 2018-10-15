@@ -13,7 +13,7 @@ class getStreamers {
     this.channelId = channelId;
     this.counter = 0;
   }
-  async getData(callback) {
+  async getData() {
      const fetcher = await fetch(`fetches/${this.name}.json`)
      const fetched = await fetcher.json();
      this.json = fetched;
@@ -55,6 +55,7 @@ class getStreamers {
           this.viewerCount = 'Offline';
         } else {
         viddiv.querySelector('.number').textContent = `${this.viewerCount} viewers`;
+        console.log('hey')
       }
   }
   addLinks() {
@@ -112,19 +113,19 @@ setInterval(init, 80000);
 let allDone = false;
 
 async function init() {
-await mix.getData();
-await ice.getData();
-await tsa.getData();
-await hyphonix.getData();
-await destiny.getData();
-await marie.getData();
-await burger.getData();
-await cxnews.getData();
-await chilledcow.getData();
-await lol.getData();
-await pepper.getData();
-await evan.getData();
-await gary.getData();
+ await mix.getData();
+ await ice.getData();
+ await tsa.getData();
+ await hyphonix.getData();
+ await destiny.getData();
+ await marie.getData();
+ await burger.getData();
+ await cxnews.getData();
+ await chilledcow.getData();
+ await lol.getData();
+ await pepper.getData();
+ await evan.getData();
+ await gary.getData();
 (() => {
   organizeCards();
   if (!allDone && !liveStreamers.length == 0) {
